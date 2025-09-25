@@ -8,7 +8,7 @@ const Home = () => {
         <div className="hero-content">
           <h1>Welcome to TechStore</h1>
           <p>Discover the latest in technology and innovation</p>
-          <a href="/products" className="cta-button">Shop Now</a>
+          <a href="/my-ecommerce-site/products" className="cta-button">Shop Now</a>
         </div>
       </section>
       
