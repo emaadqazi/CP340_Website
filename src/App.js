@@ -11,7 +11,7 @@ import './styles/App.css';
 
 function App() {
   return (
-    <Router basename="/my-ecommerce-site">
+    <Router basename="/CP340_Website">
       <div className="App">
         <Header />
         <main>
