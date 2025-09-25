@@ -1,0 +1,45 @@
+.about {
+  padding: 2rem 0;
+}
+
+.about h1 {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+  color: #2c3e50;
+}
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-text h2 {
+  color: #2c3e50;
+  margin: 2rem 0 1rem;
+  font-size: 1.5rem;
+}
+
+.about-text p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.about-text ul {
+  margin: 1rem 0 1.5rem 2rem;
+}
+
+.about-text ul li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .about h1 {
+    font-size: 2rem;
+  }
+  
+  .about-text h2 {
+    font-size: 1.3rem;
+  }
+}
