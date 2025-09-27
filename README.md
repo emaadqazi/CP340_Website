@@ -1,6 +1,7 @@
-# TechStore - E-commerce Website MVP
+# ShopCP340 - E-commerce Website for CP340
 
 A modern React-based e-commerce website showcasing technology products.
+Access at: https://emaadqazi.github.io/CP340_Website
 
 ## Features
 
@@ -92,17 +93,6 @@ src/
 ├── App.js              # Main app component
 └── index.js            # App entry point
 ```
-
-## Assignment Requirements
-
-✅ Home page with hero section and features  
-✅ Blog page with introductory post  
-✅ About page with company information  
-✅ Products page with 5+ products  
-✅ Privacy policy page  
-✅ Professional website structure  
-✅ Responsive design  
-✅ Clean navigation  
 
 ## License
 
