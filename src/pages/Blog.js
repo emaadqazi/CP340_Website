@@ -7,7 +7,7 @@ const Blog = () => {
   return (
     <div className="blog">
       <div className="container">
-        <h1>TechStore Blog</h1>
+        <h1>ShopCP340 Blog</h1>
         <div className="blog-posts">
           {blogPosts.map(post => (
             <BlogPost key={post.id} post={post} />
