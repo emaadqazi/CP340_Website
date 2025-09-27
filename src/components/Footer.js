@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="container">
         <div className="footer-content">
           <div className="footer-section">
-            <h3>TechStore</h3>
+            <h3>ShopCP340</h3>
             <p>Your premier destination for cutting-edge technology products.</p>
           </div>
           <div className="footer-section">
@@ -22,12 +22,12 @@ const Footer = () => {
           </div>
           <div className="footer-section">
             <h3>Contact</h3>
-            <p>Email: info@techstore.com</p>
+            <p>Email: info@shopcp340.com</p>
             <p>Phone: (555) 123-4567</p>
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; 2025 TechStore. All rights reserved.</p>
+          <p>&copy; 2025 ShopCP340. All rights reserved.</p>
         </div>
       </div>
     </footer>

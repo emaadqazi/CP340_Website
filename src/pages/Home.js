@@ -7,7 +7,7 @@ const Home = () => {
     <div className="home">
       <section className="hero">
         <div className="hero-content">
-          <h1>Welcome to TechStore</h1>
+          <h1>Welcome to ShopCP340</h1>
           <p>Discover the latest in technology and innovation</p>
           <Link to="/products" className="cta-button">Shop Now</Link>
         </div>
@@ -15,7 +15,7 @@ const Home = () => {
       
       <section className="features">
         <div className="container">
-          <h2>Why Choose TechStore?</h2>
+          <h2>Why Choose ShopCP340?</h2>
           <div className="features-grid">
             <div className="feature">
               <h3>Quality Products</h3>

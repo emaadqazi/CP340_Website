@@ -5,12 +5,12 @@ const About = () => {
   return (
     <div className="about">
       <div className="container">
-        <h1>About TechStore</h1>
+        <h1>About ShopCP340</h1>
         <div className="about-content">
           <div className="about-text">
             <h2>Our Story</h2>
             <p>
-              Founded in 2025, TechStore emerged from a passion for making cutting-edge technology 
+              Founded in 2025, ShopCP340 emerged from a passion for making cutting-edge technology 
               accessible to everyone. We believe that innovation should enhance lives, and our 
               carefully curated selection reflects this philosophy.
             </p>

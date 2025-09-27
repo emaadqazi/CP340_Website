@@ -1,10 +1,12 @@
 .header {
-  background: #2c3e50;
-  color: white;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  color: #FFD700;
   padding: 1rem 0;
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
+  border-bottom: 2px solid #FFD700;
 }
 
 .header .container {
@@ -14,10 +16,17 @@
 }
 
 .logo a {
-  color: white;
+  color: #FFD700;
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  transition: color 0.3s ease;
+}
+
+.logo a:hover {
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.5);
 }
 
 .nav {
@@ -26,13 +35,17 @@
 }
 
 .nav a {
-  color: white;
+  color: #ffffff;
   text-decoration: none;
-  transition: color 0.3s;
+  transition: color 0.3s ease;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
 }
 
 .nav a:hover {
-  color: #3498db;
+  color: #FFD700;
+  background-color: rgba(255, 215, 0, 0.1);
 }
 
 @media (max-width: 768px) {
@@ -43,5 +56,9 @@
   
   .nav {
     gap: 1rem;
+  }
+  
+  .logo a {
+    font-size: 1.5rem;
   }
 }

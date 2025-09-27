@@ -1,6 +1,6 @@
 {
-  "short_name": "TechStore",
-  "name": "TechStore - Technology Products",
+  "short_name": "ShopCP340",
+  "name": "ShopCP340 - Technology Products",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,6 +10,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#FFD700",
+  "background_color": "#000000"
 }

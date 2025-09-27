@@ -1,4 +1,5 @@
 import React from 'react';
+import { getCurrentDate } from '../utils/dateUtils';
 import '../styles/Privacy.css';
 
 const Privacy = () => {
@@ -7,7 +8,7 @@ const Privacy = () => {
       <div className="container">
         <h1>Privacy Policy</h1>
         <div className="privacy-content">
-          <p><strong>Last Updated:</strong> September 25, 2025</p>
+          <p><strong>Last Updated:</strong> {getCurrentDate()}</p>
           
           <h2>Information We Collect</h2>
           <p>We collect information you provide directly to us, such as when you create an account, make a purchase, or contact us for support.</p>
@@ -25,7 +26,7 @@ const Privacy = () => {
           <p>We use cookies to enhance your browsing experience and analyze site traffic. You can control cookie settings in your browser.</p>
           
           <h2>Contact Us</h2>
-          <p>If you have any questions about this Privacy Policy, please contact us at privacy@techstore.com.</p>
+          <p>If you have any questions about this Privacy Policy, please contact us at privacy@shopcp340.com.</p>
         </div>
       </div>
     </div>
