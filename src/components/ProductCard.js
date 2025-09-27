@@ -1,8 +1,12 @@
 import React from 'react';
 import { toast } from 'react-toastify';
+import { useCart } from '../context/CartContext';
 
 const ProductCard = ({ product }) => {
+  const { addToCart } = useCart();
+
   const handleAddToCart = () => {
+    addToCart(product);
     toast.success(`Successfully added ${product.name} to cart!`, {
       position: "top-right",
       autoClose: 3000,
