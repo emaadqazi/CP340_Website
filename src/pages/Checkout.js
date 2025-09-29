@@ -167,6 +167,13 @@ const Checkout = () => {
 
             <div className="form-section">
               <h2>Payment Information</h2>
+              <div className="payment-security-notice">
+                <div className="security-icon">🔒</div>
+                <div className="security-text">
+                  <strong>Secure Payment Processing</strong>
+                  <p>Your payment information is protected with 256-bit SSL encryption and processed securely. We never store your full card details on our servers.</p>
+                </div>
+              </div>
               <div className="form-group">
                 <label htmlFor="cardNumber">Card Number</label>
                 <input
@@ -205,6 +212,23 @@ const Checkout = () => {
                   />
                 </div>
               </div>
+              <div className="payment-methods">
+                <p>We accept all major credit cards:</p>
+                <div className="card-icons">
+                  <span className="card-icon">💳</span>
+                  <span className="card-icon">💳</span>
+                  <span className="card-icon">💳</span>
+                  <span className="card-icon">💳</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="privacy-agreement">
+              <label className="checkbox-label">
+                <input type="checkbox" required />
+                <span className="checkmark"></span>
+                I agree to the <Link to="/privacy" target="_blank">Privacy Policy</Link> and understand how my data will be used and protected.
+              </label>
             </div>
 
             <button type="submit" className="place-order-btn">

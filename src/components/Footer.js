@@ -23,7 +23,7 @@ const Footer = () => {
           <div className="footer-section">
             <h3>Contact</h3>
             <p>Email: info@shopcp340.com</p>
-            <p>Phone: (555) 123-4567</p>
+            <p>Phone: 1-800-SHOP-CP340</p>
           </div>
         </div>
         <div className="footer-bottom">

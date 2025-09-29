@@ -54,6 +54,24 @@
   font-weight: 400;
 }
 
+.privacy-content ul {
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+}
+
+.privacy-content li {
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+  color: #ffffff;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+}
+
+.privacy-content li strong {
+  color: #FFD700;
+  font-weight: 700;
+}
+
 .privacy-content p:first-child {
   font-weight: 700;
   color: #FFD700;
