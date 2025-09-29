@@ -15,9 +15,9 @@ const About = () => {
               carefully curated selection reflects this philosophy.
             </p>
             <p>
-              Our team consists of technology enthusiasts and industry experts who are dedicated 
-              to providing you with the latest and greatest in tech products. From smartphones 
-              to smart home devices, we've got everything you need to stay connected and productive.
+              Our team consists of 4 Computer Science students from Wilfrid Laurier University, who are on a mission
+              to provide the best customer service with the latest and greatest tech products. From smartphones to smart home 
+              devices, we have everything you need to stay connected, up to date, and productive.
             </p>
             
             <h2>Our Mission</h2>

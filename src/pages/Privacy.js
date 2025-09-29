@@ -61,17 +61,6 @@ const Privacy = () => {
             <li><strong>Return/Exchange Data:</strong> Return and exchange information is tracked for quality assurance</li>
           </ul>
           
-          <h2>Data Security</h2>
-          <p>We implement comprehensive security measures to protect your personal information:</p>
-          <ul>
-            <li>Encrypted data transmission and storage</li>
-            <li>Regular security audits and updates</li>
-            <li>Access controls and authentication protocols</li>
-            <li>Secure server infrastructure</li>
-            <li>Employee training on data protection</li>
-            <li>Incident response procedures</li>
-          </ul>
-          
           <h2>Cookies and Tracking</h2>
           <p>We use cookies and similar technologies to:</p>
           <ul>
@@ -91,16 +80,6 @@ const Privacy = () => {
             <li><strong>Fonts and Icons:</strong> Google Fonts and other external resources are used for design</li>
           </ul>
           <p>All external data sources are properly attributed and used in accordance with their respective licenses and terms of use.</p>
-          
-          <h2>Rights Reserved for Public Publication</h2>
-          <p>If this website is published publicly, the following rights are reserved:</p>
-          <ul>
-            <li><strong>Intellectual Property:</strong> All original content, design, and code remain the property of the website owner</li>
-            <li><strong>Commercial Use:</strong> The website design and functionality may not be used for commercial purposes without permission</li>
-            <li><strong>Attribution:</strong> Any use of this website's design or code must include proper attribution</li>
-            <li><strong>Modification Rights:</strong> The owner reserves the right to modify or remove content at any time</li>
-            <li><strong>Privacy Compliance:</strong> Users must comply with all privacy policies and terms of use</li>
-          </ul>
           
           <h2>Your Rights</h2>
           <p>You have the right to:</p>
