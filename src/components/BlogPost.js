@@ -5,7 +5,7 @@ const BlogPost = ({ post }) => {
     <article className="blog-post">
       <h2>{post.title}</h2>
       <div className="post-meta">
-        <span>By {post.author}</span>
+        <span>By: {post.author}</span>
         <span>{post.date}</span>
       </div>
       <div className="post-content">

@@ -4,8 +4,7 @@ export const blogPosts = [
   {
     id: 1,
     title: "Welcome to ShopCP340 - Your Gateway to Innovation",
-    author: "ShopCP340 Team",
-    date: getCurrentDate(),
+    author: "The ShopCP340 Team, September 26th 2025",
     content: `Welcome to ShopCP340, where cutting-edge technology meets exceptional customer service. We're excited to launch our new e-commerce platform, designed to bring you the latest and greatest in tech products.
 
 Our mission is simple: to make innovative technology accessible to everyone. Whether you're a tech enthusiast, a professional looking for productivity tools, or someone just starting their digital journey, we have something for you.
