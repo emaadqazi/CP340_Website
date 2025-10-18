@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
-import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Elements } from '@stripe/react-stripe-js';
+import StripePaymentForm from '../components/StripePaymentForm';
+import OrderConfirmation from '../components/OrderConfirmation';
+import { stripePromise } from '../utils/stripeConfig';
 import '../styles/Checkout.css';
+import '../styles/StripePayment.css';
+import '../styles/OrderConfirmation.css';
 
 const Checkout = () => {
   const { items, getTotalPrice, clearCart } = useCart();
   const total = getTotalPrice();
+  const navigate = useNavigate();
   
   const [formData, setFormData] = useState({
     firstName: '',
@@ -15,11 +21,12 @@ const Checkout = () => {
     phone: '',
     address: '',
     city: '',
-    zipCode: '',
-    cardNumber: '',
-    expiryDate: '',
-    cvv: ''
+    zipCode: ''
   });
+  
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [paymentIntent, setPaymentIntent] = useState(null);
+  const [orderDetails, setOrderDetails] = useState(null);
 
   const handleInputChange = (e) => {
     setFormData({
@@ -28,33 +35,35 @@ const Checkout = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Simulate checkout process
-    toast.success('Order placed successfully! Thank you for shopping with ShopCP340!', {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
+  const handlePaymentSuccess = (paymentIntentData) => {
+    setPaymentIntent(paymentIntentData);
+    setOrderDetails({
+      items: items,
+      total: total,
+      shippingInfo: formData
     });
+    setPaymentSuccess(true);
     clearCart();
-    // Reset form
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      address: '',
-      city: '',
-      zipCode: '',
-      cardNumber: '',
-      expiryDate: '',
-      cvv: ''
-    });
   };
 
+  const handlePaymentError = (error) => {
+    console.error('Payment failed:', error);
+    // Error handling is done in the StripePaymentForm component
+  };
+
+  // Redirect to products if cart is empty and not in success state
+  useEffect(() => {
+    if (items.length === 0 && !paymentSuccess) {
+      navigate('/products');
+    }
+  }, [items.length, paymentSuccess, navigate]);
+
+  // Show order confirmation if payment was successful
+  if (paymentSuccess && orderDetails) {
+    return <OrderConfirmation orderDetails={orderDetails} paymentIntent={paymentIntent} />;
+  }
+
+  // Show empty cart message if no items
   if (items.length === 0) {
     return (
       <div className="checkout">
@@ -77,9 +86,9 @@ const Checkout = () => {
   return (
     <div className="checkout">
       <div className="container">
-        <h1>Checkout</h1>
+        <h1>Secure Checkout</h1>
         <div className="checkout-content">
-          <form onSubmit={handleSubmit} className="checkout-form">
+          <div className="checkout-form">
             <div className="form-section">
               <h2>Shipping Information</h2>
               <div className="form-row">
@@ -166,61 +175,13 @@ const Checkout = () => {
             </div>
 
             <div className="form-section">
-              <h2>Payment Information</h2>
-              <div className="payment-security-notice">
-                <div className="security-icon">🔒</div>
-                <div className="security-text">
-                  <strong>Secure Payment Processing</strong>
-                  <p>Your payment information is protected with 256-bit SSL encryption and processed securely. We never store your full card details on our servers.</p>
-                </div>
-              </div>
-              <div className="form-group">
-                <label htmlFor="cardNumber">Card Number</label>
-                <input
-                  type="text"
-                  id="cardNumber"
-                  name="cardNumber"
-                  value={formData.cardNumber}
-                  onChange={handleInputChange}
-                  placeholder="1234 5678 9012 3456"
-                  required
+              <Elements stripe={stripePromise}>
+                <StripePaymentForm 
+                  totalAmount={total}
+                  onPaymentSuccess={handlePaymentSuccess}
+                  onPaymentError={handlePaymentError}
                 />
-              </div>
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="expiryDate">Expiry Date</label>
-                  <input
-                    type="text"
-                    id="expiryDate"
-                    name="expiryDate"
-                    value={formData.expiryDate}
-                    onChange={handleInputChange}
-                    placeholder="MM/YY"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="cvv">CVV</label>
-                  <input
-                    type="text"
-                    id="cvv"
-                    name="cvv"
-                    value={formData.cvv}
-                    onChange={handleInputChange}
-                    placeholder="123"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="payment-methods">
-                <p>We accept all major credit cards:</p>
-                <div className="card-icons">
-                  <span className="card-icon">💳</span>
-                  <span className="card-icon">💳</span>
-                  <span className="card-icon">💳</span>
-                  <span className="card-icon">💳</span>
-                </div>
-              </div>
+              </Elements>
             </div>
 
             <div className="privacy-agreement">
@@ -230,11 +191,7 @@ const Checkout = () => {
                 I agree to the <Link to="/privacy" target="_blank">Privacy Policy</Link> and understand how my data will be used and protected.
               </label>
             </div>
-
-            <button type="submit" className="place-order-btn">
-              Place Order - ${total.toFixed(2)}
-            </button>
-          </form>
+          </div>
 
           <div className="order-summary">
             <div className="summary-card">

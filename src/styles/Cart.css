@@ -40,7 +40,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
+  background: linear-gradient(90deg, #FFD700 0%, #FFD700 100%);
 }
 
 .empty-cart-content h2 {
@@ -59,7 +59,7 @@
 }
 
 .continue-shopping {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  background: linear-gradient(135deg, #FFD700 0%, #FFD700 100%);
   color: #000000;
   padding: 1rem 2rem;
   text-decoration: none;
@@ -112,7 +112,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
+  background: linear-gradient(90deg, #FFD700 0%, #FFD700 100%);
 }
 
 .item-image {
@@ -159,7 +159,7 @@
 }
 
 .quantity-btn {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  background: linear-gradient(135deg, #FFD700 0%, #FFD700 100%);
   color: #000000;
   border: none;
   width: 30px;
@@ -233,7 +233,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
+  background: linear-gradient(90deg, #FFD700 0%, #FFD700 100%);
 }
 
 .summary-card h2 {
@@ -269,7 +269,7 @@
 }
 
 .checkout-btn {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  background: linear-gradient(135deg, #FFD700 0%, #FFD700 100%);
   color: #000000;
   padding: 1rem;
   text-decoration: none;

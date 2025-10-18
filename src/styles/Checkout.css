@@ -1,6 +1,6 @@
 .checkout {
   padding: 3rem 0;
-  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  background: #000000 !important;
   min-height: calc(100vh - 200px);
 }
 
@@ -24,11 +24,11 @@
 
 .empty-checkout-content {
   text-align: center;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  background: #000000 !important;
   padding: 3rem;
   border-radius: 15px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-  border: 1px solid #333333;
+  border: 1px solid #ffd700;
   position: relative;
   overflow: hidden;
 }
@@ -40,7 +40,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
+  background: linear-gradient(90deg, #FFD700 0%, #FFD700 100%);
 }
 
 .empty-checkout-content h2 {
@@ -59,7 +59,7 @@
 }
 
 .continue-shopping {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  background: linear-gradient(135deg, #FFD700 0%, #FFD700 100%);
   color: #000000;
   padding: 1rem 2rem;
   text-decoration: none;
@@ -86,11 +86,11 @@
 }
 
 .checkout-form {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  background: #000000 !important;
   padding: 2rem;
   border-radius: 15px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-  border: 1px solid #333333;
+  border: 1px solid #FFD700;
   position: relative;
   overflow: hidden;
 }
@@ -102,7 +102,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
+  background: linear-gradient(90deg, #FFD700 0%, #FFD700 100%);
 }
 
 .form-section {
@@ -155,7 +155,7 @@
 
 .place-order-btn {
   width: 100%;
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  background: linear-gradient(135deg, #FFD700 0%, #FFD700 100%);
   color: #000000;
   padding: 1rem;
   border: none;
@@ -195,7 +195,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
+  background: linear-gradient(90deg, #FFD700 0%, #FFD700 100%);
 }
 
 .security-icon {
@@ -310,7 +310,7 @@
 }
 
 .checkbox-label a:hover {
-  color: #FFA500;
+  color: #FFD700;
 }
 
 .order-summary {
@@ -320,11 +320,11 @@
 }
 
 .summary-card {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  background: #000000 !important;
   padding: 2rem;
   border-radius: 15px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-  border: 1px solid #333333;
+  border: 1px solid #FFD700;
   position: relative;
   overflow: hidden;
 }
@@ -336,7 +336,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
+  background: linear-gradient(90deg, #FFD700 0%, #FFD700 100%);
 }
 
 .summary-card h2 {
