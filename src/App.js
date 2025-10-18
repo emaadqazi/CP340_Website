@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { HelmetProvider } from 'react-helmet-async';
 import { CartProvider } from './context/CartContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -17,37 +18,39 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <CartProvider>
-      <Router basename="/CP340_Website">
-        <div className="App">
-          <Header />
-          <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/checkout" element={<Checkout />} />
-            </Routes>
-          </main>
-          <Footer />
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-          />
-        </div>
-      </Router>
-    </CartProvider>
+    <HelmetProvider>
+      <CartProvider>
+        <Router basename="/CP340_Website">
+          <div className="App">
+            <Header />
+            <main>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/checkout" element={<Checkout />} />
+              </Routes>
+            </main>
+            <Footer />
+            <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+            />
+          </div>
+        </Router>
+      </CartProvider>
+    </HelmetProvider>
   );
 }
 

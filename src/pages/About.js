@@ -1,9 +1,24 @@
 import React from 'react';
+import SEO from '../components/SEO';
+import { SEO_KEYWORDS, DEFAULT_DESCRIPTIONS, generateOrganizationStructuredData } from '../utils/seoUtils';
 import '../styles/About.css';
 
 const About = () => {
+  const structuredData = generateOrganizationStructuredData();
+  
   return (
-    <div className="about">
+    <>
+      <SEO
+        title="About Us"
+        description={DEFAULT_DESCRIPTIONS.about}
+        keywords={SEO_KEYWORDS.about}
+        url="/about"
+        type="website"
+      />
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData)}
+      </script>
+      <div className="about">
       <div className="container">
         <h1>About ShopCP340</h1>
         <div className="about-content">
@@ -37,7 +52,8 @@ const About = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

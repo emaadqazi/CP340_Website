@@ -20,7 +20,11 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="product-card">
-      <img src={product.image} alt={product.name} />
+      <img 
+        src={product.image} 
+        alt={`${product.name} - ${product.description.substring(0, 60)}...`}
+        title={product.name}
+      />
       <div className="product-info">
         <h3>{product.name}</h3>
         <p>{product.description}</p>

@@ -1,10 +1,20 @@
 import React from 'react';
+import SEO from '../components/SEO';
 import { getCurrentDate } from '../utils/dateUtils';
+import { SEO_KEYWORDS, DEFAULT_DESCRIPTIONS } from '../utils/seoUtils';
 import '../styles/Privacy.css';
 
 const Privacy = () => {
   return (
-    <div className="privacy">
+    <>
+      <SEO
+        title="Privacy Policy"
+        description={DEFAULT_DESCRIPTIONS.privacy}
+        keywords={SEO_KEYWORDS.privacy}
+        url="/privacy"
+        type="website"
+      />
+      <div className="privacy">
       <div className="container">
         <h1>Privacy Policy</h1>
         <div className="privacy-content">
@@ -104,7 +114,8 @@ const Privacy = () => {
           <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date. You are advised to review this Privacy Policy periodically for any changes.</p>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 
