@@ -1,9 +1,11 @@
 import React from 'react';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
+  const navigate = useNavigate();
 
   const handleAddToCart = () => {
     addToCart(product);
@@ -16,6 +18,7 @@ const ProductCard = ({ product }) => {
       draggable: true,
       progress: undefined,
     });
+    navigate('/cart');
   };
 
   return (
