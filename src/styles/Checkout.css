@@ -313,6 +313,103 @@
   color: #FFD700;
 }
 
+/* Step Navigation Buttons */
+.proceed-to-payment-btn {
+  background: linear-gradient(135deg, #FFD700 0%, #FFD700 100%);
+  color: #000000;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 1.5rem;
+  font-family: 'Lato', sans-serif;
+}
+
+.proceed-to-payment-btn:hover {
+  background: linear-gradient(135deg, #ffffff 0%, #FFD700 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+}
+
+.back-btn {
+  background: transparent;
+  color: #FFD700;
+  border: 2px solid #FFD700;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+  font-family: 'Lato', sans-serif;
+}
+
+.back-btn:hover {
+  background: #FFD700;
+  color: #000000;
+  transform: translateY(-2px);
+}
+
+.pay-btn {
+  background: linear-gradient(135deg, #FFD700 0%, #FFD700 100%);
+  color: #000000;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 1.5rem;
+  font-family: 'Lato', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.pay-btn:hover {
+  background: linear-gradient(135deg, #ffffff 0%, #FFD700 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+}
+
+.pay-btn .payment-icon {
+  font-size: 1.2rem;
+}
+
+.pay-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.pay-btn:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #000000;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 .order-summary {
   position: sticky;
   top: 100px;

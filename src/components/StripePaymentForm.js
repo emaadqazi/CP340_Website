@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { simulatePaymentProcessing } from '../utils/mockPaymentService';
 
-const StripePaymentForm = ({ totalAmount, onPaymentSuccess, onPaymentError }) => {
+const StripePaymentForm = ({ totalAmount, onPaymentSuccess, onPaymentError, onPaymentReady }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [paymentError, setPaymentError] = useState(null);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
+  // Expose the payment function to parent component
+  const processPayment = async () => {
     setIsLoading(true);
     setPaymentError(null);
 
@@ -63,6 +62,13 @@ const StripePaymentForm = ({ totalAmount, onPaymentSuccess, onPaymentError }) =>
     }
   };
 
+  // Expose payment function to parent component
+  React.useEffect(() => {
+    if (onPaymentReady) {
+      onPaymentReady(processPayment, isLoading);
+    }
+  }, [processPayment, isLoading]);
+
   return (
     <div className="stripe-payment-form">
       <div className="payment-header">
@@ -74,7 +80,7 @@ const StripePaymentForm = ({ totalAmount, onPaymentSuccess, onPaymentError }) =>
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="payment-form">
+      <div className="payment-form">
         <div className="payment-element-container">
           <div className="demo-payment-notice">
             <h4>Demo Payment Form</h4>
@@ -94,25 +100,12 @@ const StripePaymentForm = ({ totalAmount, onPaymentSuccess, onPaymentError }) =>
           </div>
         )}
 
-        <div className="payment-actions">
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="submit-payment-btn"
-          >
-            {isLoading ? (
-              <>
-                <span className="loading-spinner"></span>
-                Processing Payment...
-              </>
-            ) : (
-              <>
-                <span className="payment-icon">💳</span>
-                Pay ${totalAmount.toFixed(2)}
-              </>
-            )}
-          </button>
-        </div>
+        {isLoading && (
+          <div className="payment-processing">
+            <span className="loading-spinner"></span>
+            Processing Payment...
+          </div>
+        )}
 
         <div className="payment-info">
           <p className="test-mode-notice">
@@ -128,7 +121,7 @@ const StripePaymentForm = ({ totalAmount, onPaymentSuccess, onPaymentError }) =>
             </div>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

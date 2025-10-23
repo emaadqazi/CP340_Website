@@ -27,6 +27,9 @@ const Checkout = () => {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [paymentIntent, setPaymentIntent] = useState(null);
   const [orderDetails, setOrderDetails] = useState(null);
+  const [currentStep, setCurrentStep] = useState(1); // 1 = Shipping, 2 = Payment
+  const [paymentFunction, setPaymentFunction] = useState(null);
+  const [isPaymentLoading, setIsPaymentLoading] = useState(false);
 
   const handleInputChange = (e) => {
     setFormData({
@@ -49,6 +52,25 @@ const Checkout = () => {
   const handlePaymentError = (error) => {
     console.error('Payment failed:', error);
     // Error handling is done in the StripePaymentForm component
+  };
+
+  const handleProceedToPayment = () => {
+    setCurrentStep(2);
+  };
+
+  const handleBackToShipping = () => {
+    setCurrentStep(1);
+  };
+
+  const handlePaymentReady = (paymentFn, loading) => {
+    setPaymentFunction(() => paymentFn);
+    setIsPaymentLoading(loading);
+  };
+
+  const handlePayClick = async () => {
+    if (paymentFunction) {
+      await paymentFunction();
+    }
   };
 
   // Redirect to products if cart is empty and not in success state
@@ -89,8 +111,9 @@ const Checkout = () => {
         <h1>Secure Checkout</h1>
         <div className="checkout-content">
           <div className="checkout-form">
-            <div className="form-section">
-              <h2>Shipping Information</h2>
+            {currentStep === 1 && (
+              <div className="form-section">
+                <h2>Shipping Information</h2>
               <div className="form-row">
                 <div className="form-group">
                   <label htmlFor="firstName">First Name</label>
@@ -172,17 +195,25 @@ const Checkout = () => {
                   />
                 </div>
               </div>
-            </div>
+              </div>
+            )}
 
-            <div className="form-section">
-              <Elements stripe={stripePromise}>
-                <StripePaymentForm 
-                  totalAmount={total}
-                  onPaymentSuccess={handlePaymentSuccess}
-                  onPaymentError={handlePaymentError}
-                />
-              </Elements>
-            </div>
+            {currentStep === 2 && (
+              <div className="form-section">
+                <h2>Payment Information</h2>
+                <button onClick={handleBackToShipping} className="back-btn">
+                  ← Back to Shipping
+                </button>
+                      <Elements stripe={stripePromise}>
+                        <StripePaymentForm
+                          totalAmount={total}
+                          onPaymentSuccess={handlePaymentSuccess}
+                          onPaymentError={handlePaymentError}
+                          onPaymentReady={handlePaymentReady}
+                        />
+                      </Elements>
+              </div>
+            )}
 
             <div className="privacy-agreement">
               <label className="checkbox-label">
@@ -221,6 +252,30 @@ const Checkout = () => {
                   <span>Total:</span>
                   <span>${total.toFixed(2)}</span>
                 </div>
+                {currentStep === 1 && (
+                  <button onClick={handleProceedToPayment} className="proceed-to-payment-btn">
+                    Proceed to Payment
+                  </button>
+                )}
+                {currentStep === 2 && (
+                  <button 
+                    onClick={handlePayClick} 
+                    disabled={isPaymentLoading || !paymentFunction}
+                    className="pay-btn"
+                  >
+                    {isPaymentLoading ? (
+                      <>
+                        <span className="loading-spinner"></span>
+                        Processing Payment...
+                      </>
+                    ) : (
+                      <>
+                        <span className="payment-icon">💳</span>
+                        Pay ${total.toFixed(2)}
+                      </>
+                    )}
+                  </button>
+                )}
               </div>
             </div>
           </div>

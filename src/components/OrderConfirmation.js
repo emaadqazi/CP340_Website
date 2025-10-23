@@ -25,8 +25,11 @@ const OrderConfirmation = ({ orderDetails, paymentIntent }) => {
           </div>
 
           <div className="order-details">
+            {/* Consolidated Order Information Card */}
             <div className="order-info-card">
               <h2>Order Information</h2>
+              
+              {/* Order Details Grid */}
               <div className="order-info-grid">
                 <div className="info-item">
                   <label>Order Number:</label>
@@ -48,8 +51,42 @@ const OrderConfirmation = ({ orderDetails, paymentIntent }) => {
                   <label>Payment Method:</label>
                   <span>Credit Card ending in ****{paymentIntent?.charges?.data?.[0]?.payment_method_details?.card?.last4 || '4242'}</span>
                 </div>
-                <div className="info-item">
-                  <label>Total Amount:</label>
+              </div>
+
+              {/* Order Items Section */}
+              <div className="order-items-section">
+                <h3>Order Items</h3>
+                <div className="items-list">
+                  {orderDetails?.items?.map((item, index) => (
+                    <div key={index} className="order-item">
+                      <img src={item.image} alt={item.name} className="item-image" />
+                      <div className="item-details">
+                        <h4>{item.name}</h4>
+                        <p>{item.description}</p>
+                        <div className="item-quantity">Quantity: {item.quantity}</div>
+                      </div>
+                      <div className="item-price">
+                        ${(item.price * item.quantity).toFixed(2)}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Shipping Information */}
+              <div className="shipping-info-section">
+                <h3>Shipping Information</h3>
+                <div className="shipping-details">
+                  <p><strong>Estimated Delivery:</strong> 3-5 business days</p>
+                  <p><strong>Shipping Method:</strong> Standard Shipping (FREE)</p>
+                  <p><strong>Tracking:</strong> You will receive a tracking number via email once your order ships.</p>
+                </div>
+              </div>
+
+              {/* Total Amount */}
+              <div className="order-total-section">
+                <div className="total-row final-total">
+                  <span>Total Amount:</span>
                   <span className="total-amount">
                     ${((paymentIntent?.amount || orderDetails?.total || 0) / 100).toFixed(2)}
                   </span>
@@ -57,34 +94,7 @@ const OrderConfirmation = ({ orderDetails, paymentIntent }) => {
               </div>
             </div>
 
-            <div className="order-items-card">
-              <h2>Order Items</h2>
-              <div className="items-list">
-                {orderDetails?.items?.map((item, index) => (
-                  <div key={index} className="order-item">
-                    <img src={item.image} alt={item.name} className="item-image" />
-                    <div className="item-details">
-                      <h3>{item.name}</h3>
-                      <p>{item.description}</p>
-                      <div className="item-quantity">Quantity: {item.quantity}</div>
-                    </div>
-                    <div className="item-price">
-                      ${(item.price * item.quantity).toFixed(2)}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="shipping-info-card">
-              <h2>Shipping Information</h2>
-              <div className="shipping-details">
-                <p><strong>Estimated Delivery:</strong> 3-5 business days</p>
-                <p><strong>Shipping Method:</strong> Standard Shipping (FREE)</p>
-                <p><strong>Tracking:</strong> You will receive a tracking number via email once your order ships.</p>
-              </div>
-            </div>
-
+            {/* Combined Next Steps and Support Card */}
             <div className="next-steps-card">
               <h2>What's Next?</h2>
               <div className="next-steps">
@@ -110,6 +120,17 @@ const OrderConfirmation = ({ orderDetails, paymentIntent }) => {
                   </div>
                 </div>
               </div>
+
+              <div className="support-info-section">
+                <h3>Need Help?</h3>
+                <p>
+                  If you have any questions about your order, please contact our customer support team.
+                </p>
+                <div className="contact-info">
+                  <span>📧 support@shopcp340.com</span>
+                  <span>📞 1-800-SHOP-CP340</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -120,17 +141,6 @@ const OrderConfirmation = ({ orderDetails, paymentIntent }) => {
             <Link to="/blog" className="blog-link">
               Read Our Blog
             </Link>
-          </div>
-
-          <div className="support-info">
-            <h3>Need Help?</h3>
-            <p>
-              If you have any questions about your order, please contact our customer support team.
-            </p>
-            <div className="contact-info">
-              <span>📧 support@shopcp340.com</span>
-              <span>📞 1-800-SHOP-CP340</span>
-            </div>
           </div>
         </div>
       </div>

@@ -60,17 +60,20 @@
 }
 
 .order-info-card,
-.order-items-card,
 .shipping-info-card,
 .next-steps-card {
   background: #000000 !important;
   border-radius: 12px;
   padding: 24px;
   border: 1px solid #f59e0b;
+  margin-bottom: 24px;
+}
+
+.order-info-card {
+  padding: 32px;
 }
 
 .order-info-card h2,
-.order-items-card h2,
 .shipping-info-card h2,
 .next-steps-card h2 {
   color: #FFD700;
@@ -79,6 +82,25 @@
   margin-bottom: 20px;
   border-bottom: 2px solid #FFD700;
   padding-bottom: 12px;
+}
+
+.support-info-section h3 {
+  color: #FFD700;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 32px 0 16px 0;
+  border-bottom: 1px solid #FFD700;
+  padding-bottom: 8px;
+}
+
+.order-items-section h3,
+.shipping-info-section h3 {
+  color: #FFD700;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 24px 0 16px 0;
+  border-bottom: 1px solid #FFD700;
+  padding-bottom: 8px;
 }
 
 .order-info-grid {
@@ -125,6 +147,34 @@
   font-size: 18px !important;
 }
 
+.order-total-section {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 2px solid #FFD700;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.total-row.final-total {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.total-row.final-total span:first-child {
+  color: #ffffff;
+}
+
+.total-row.final-total span:last-child {
+  color: #FFD700 !important;
+  font-size: 20px !important;
+}
+
 .items-list {
   display: flex;
   flex-direction: column;
@@ -153,6 +203,13 @@
 }
 
 .item-details h3 {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.item-details h4 {
   color: #ffffff;
   font-size: 16px;
   font-weight: 600;
@@ -267,6 +324,13 @@
   transform: translateY(-2px);
 }
 
+.support-info-section {
+  text-align: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #FFD700;
+}
+
 .support-info {
   text-align: center;
   background: #000000 !important;
@@ -283,6 +347,13 @@
 }
 
 .support-info p {
+  color: #9ca3af;
+  font-size: 16px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.support-info-section p {
   color: #9ca3af;
   font-size: 16px;
   margin-bottom: 20px;
@@ -349,5 +420,33 @@
   .contact-info {
     flex-direction: column;
     gap: 12px;
+  }
+  
+  .order-info-card {
+    padding: 20px;
+  }
+  
+  .order-items-section h3,
+  .shipping-info-section h3 {
+    font-size: 16px;
+    margin: 20px 0 12px 0;
+  }
+  
+  .total-row.final-total {
+    font-size: 16px;
+  }
+  
+  .total-row.final-total span:last-child {
+    font-size: 18px !important;
+  }
+  
+  .support-info-section h3 {
+    font-size: 16px;
+    margin: 24px 0 12px 0;
+  }
+  
+  .support-info-section {
+    margin-top: 24px;
+    padding-top: 20px;
   }
 }
