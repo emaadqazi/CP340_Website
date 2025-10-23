@@ -3,6 +3,14 @@ import { Link } from 'react-router-dom';
 import '../styles/Footer.css';
 
 const Footer = () => {
+  // Function to scroll to top of page
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <footer className="footer">
       <div className="container">
@@ -24,6 +32,23 @@ const Footer = () => {
             <h3>Contact</h3>
             <p>Email: info@shopcp340.com</p>
             <p>Phone: 1-800-SHOP-CP340</p>
+            <div className="social-media">
+              <Link to="/" className="social-icon" onClick={scrollToTop}>
+                <i className="fab fa-linkedin"></i>
+              </Link>
+              <Link to="/" className="social-icon" onClick={scrollToTop}>
+                <i className="fab fa-instagram"></i>
+              </Link>
+              <Link to="/" className="social-icon" onClick={scrollToTop}>
+                <i className="fab fa-twitter"></i>
+              </Link>
+              <Link to="/" className="social-icon" onClick={scrollToTop}>
+                <i className="fab fa-facebook"></i>
+              </Link>
+              <Link to="/" className="social-icon" onClick={scrollToTop}>
+                <i className="fab fa-youtube"></i>
+              </Link>
+            </div>
           </div>
         </div>
         <div className="footer-bottom">
