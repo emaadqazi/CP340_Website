@@ -26,28 +26,32 @@ const About = () => {
             <h2>Our Story</h2>
             <p>
               Founded in 2025, ShopCP340 emerged from a passion for making cutting-edge technology 
-              accessible to everyone. We believe that innovation should enhance lives, and our 
-              carefully curated selection reflects this philosophy.
+              accessible to students everywhere. We firmly believe that the right technology can make a significant 
+              impact on your academic performance and productivity, and our carefully curated selection reflects this philosophy.
             </p>
             <p>
-              Our team consists of 4 Computer Science students from Wilfrid Laurier University, who are on a mission
-              to provide the best customer service with the latest and greatest tech products. From smartphones to smart home 
-              devices, we have everything you need to stay connected, up to date, and productive.
+              Our team consists of 4 Computer Science students from Wilfrid Laurier University, who are committed 
+              to enhancing your productivity and academic success. We provide the best customer service with the latest 
+              and greatest tech products designed specifically for students. From powerful laptops and ultrawide monitors 
+              to noise-cancelling headphones and essential accessories, we have everything you need to excel in your studies 
+              and maximize your academic performance.
             </p>
             
             <h2>Our Mission</h2>
             <p>
-              To democratize access to innovative technology by providing high-quality products, 
-              expert guidance, and exceptional customer service. We're not just selling products; 
-              we're building a community of tech enthusiasts.
+              To empower students by democratizing access to innovative technology that enhances productivity and academic performance. 
+              We provide high-quality products, expert guidance, and exceptional customer service specifically tailored for student needs. 
+              We're not just selling products; we're building a community of student tech enthusiasts committed to academic excellence 
+              and enhanced productivity.
             </p>
             
             <h2>Our Values</h2>
             <ul>
-              <li><strong>Innovation:</strong> We constantly seek the latest technological advances</li>
-              <li><strong>Quality:</strong> Every product meets our rigorous standards</li>
-              <li><strong>Customer Focus:</strong> Your satisfaction is our top priority</li>
-              <li><strong>Sustainability:</strong> We promote eco-friendly tech solutions</li>
+              <li><strong>Student Success:</strong> We're committed to enhancing your productivity and academic performance</li>
+              <li><strong>Innovation:</strong> We constantly seek the latest technological advances for student needs</li>
+              <li><strong>Quality:</strong> Every product meets our rigorous standards for student productivity</li>
+              <li><strong>Student Focus:</strong> Your academic success and satisfaction is our top priority</li>
+              <li><strong>Sustainability:</strong> We promote eco-friendly tech solutions for the next generation</li>
             </ul>
           </div>
         </div>

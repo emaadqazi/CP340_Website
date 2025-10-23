@@ -17,27 +17,27 @@ const Home = () => {
       <div className="home">
       <section className="hero">
         <div className="hero-content">
-          <h1>Welcome to ShopCP340 - Your Trusted Technology Products Store</h1>
-          <p>Discover the latest technology products, electronics, and innovative gadgets at affordable prices</p>
-          <Link to="/products" className="cta-button">Shop Now</Link>
+          <h1>Welcome to ShopCP340</h1>
+          <p>Discover the perfect technology tools and gadgets designed to boost your academic performance and study productivity</p>
+          <Link to="/products" className="cta-button">Shop Student Tech</Link>
         </div>
       </section>
       
       <section className="features">
         <div className="container">
-          <h2>Why Choose Our Technology Products Store?</h2>
+          <h2>Why Choose Our Store?</h2>
           <div className="features-grid">
             <div className="feature">
-              <h3>Premium Quality Electronics</h3>
-              <p>We offer only the highest quality technology products and electronics from trusted brands.</p>
+              <h3>Student-Focused Technology</h3>
+              <p>We curate technology products specifically designed to enhance your studying experience and academic productivity.</p>
             </div>
             <div className="feature">
               <h3>Fast & Free Shipping</h3>
-              <p>Get your technology products and electronics delivered quickly with our express shipping options.</p>
+              <p>Get your study essentials delivered quickly to your dorm or apartment with our express shipping options.</p>
             </div>
             <div className="feature">
-              <h3>Expert Technology Support</h3>
-              <p>Our technology experts are here to help you make the right choice for all your electronics needs.</p>
+              <h3>Student Technology Experts</h3>
+              <p>Our team understands student needs and helps you choose the perfect tech tools for your academic success.</p>
             </div>
           </div>
         </div>
