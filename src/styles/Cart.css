@@ -98,7 +98,8 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
   border: 1px solid #333333;
   display: grid;
-  grid-template-columns: 100px 1fr auto auto;
+  grid-template-columns: 100px 1fr auto;
+  grid-template-rows: auto auto;
   gap: 1rem;
   align-items: center;
   position: relative;
@@ -195,6 +196,9 @@
   font-weight: 400;
   font-size: 0.8rem;
   transition: all 0.3s ease;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
 }
 
 .remove-btn:hover {

@@ -60,16 +60,13 @@ const Cart = () => {
                       +
                     </button>
                   </div>
-                  <button
-                    onClick={() => removeFromCart(item.id)}
-                    className="remove-btn"
-                  >
-                    Remove
-                  </button>
                 </div>
-                <div className="item-total">
-                  ${(item.price * item.quantity).toFixed(2)}
-                </div>
+                <button
+                  onClick={() => removeFromCart(item.id)}
+                  className="remove-btn"
+                >
+                  Remove
+                </button>
               </div>
             ))}
           </div>
