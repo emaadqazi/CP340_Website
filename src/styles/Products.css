@@ -21,6 +21,21 @@
   gap: 2rem;
 }
 
+.category-section {
+  margin-bottom: 4rem;
+}
+
+.category-heading {
+  font-family: 'Lato', sans-serif;
+  text-align: left;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  color: #FFD700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
 .product-card {
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
   border-radius: 15px;
@@ -111,6 +126,10 @@
 
 @media (max-width: 768px) {
   .products h1 {
+    font-size: 2rem;
+  }
+  
+  .category-heading {
     font-size: 2rem;
   }
   

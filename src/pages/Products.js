@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import ProductCard from '../components/ProductCard';
 import SEO from '../components/SEO';
@@ -8,6 +8,23 @@ import '../styles/Products.css';
 
 const Products = () => {
   const structuredData = generateProductStructuredData(products);
+  
+  // Group products by category
+  const productsByCategory = products.reduce((acc, product) => {
+    if (!acc[product.category]) {
+      acc[product.category] = [];
+    }
+    acc[product.category].push(product);
+    return acc;
+  }, {});
+  
+  // Define category display names
+  const categoryNames = {
+    'Monitors': 'Displays',
+    'Laptops': 'Laptops',
+    'Headphones': 'Headphones',
+    'Accessories': 'Accessories'
+  };
   
   return (
     <>
@@ -24,15 +41,20 @@ const Products = () => {
         </script>
       </Helmet>
       <div className="products">
-      <div className="container">
-        <h1>Technology Products & Electronics Store</h1>
-        <p className="products-intro">Discover our curated collection of premium technology products, electronics, and gadgets. From wireless headphones to smart devices, we offer quality technology products at competitive prices.</p>
-        <div className="products-grid">
-          {products.map(product => (
-            <ProductCard key={product.id} product={product} />
+        <div className="container">
+          <h1>Student Technology & Productivity Store</h1>
+          
+          {Object.keys(productsByCategory).map(category => (
+            <div key={category} className="category-section">
+              <h2 className="category-heading">{categoryNames[category]}:</h2>
+              <div className="products-grid">
+                {productsByCategory[category].map(product => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
-      </div>
       </div>
     </>
   );
