@@ -6,6 +6,9 @@ import { SEO_KEYWORDS, DEFAULT_DESCRIPTIONS } from '../utils/seoUtils';
 import '../styles/Blog.css';
 
 const Blog = () => {
+  // Sort posts by date (newest first)
+  const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
+  
   return (
     <>
       <SEO
@@ -17,9 +20,9 @@ const Blog = () => {
       />
       <div className="blog">
       <div className="container">
-        <h1>ShopCP340 Blog</h1>
+        <h1>Blog Posts</h1>
         <div className="blog-posts">
-          {blogPosts.map(post => (
+          {sortedPosts.map(post => (
             <BlogPost key={post.id} post={post} />
           ))}
         </div>
