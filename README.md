@@ -3,65 +3,12 @@
 A modern React-based e-commerce website showcasing technology products.
 Access at: https://emaadqazi.github.io/CP340_Website
 
-## Features
-
-- **Home Page**: Hero section with call-to-action and feature highlights
-- **About Page**: Company information and mission statement
-- **Products Page**: Display of 5+ technology products with pricing
-- **Blog Page**: Company blog with introductory post
-- **Privacy Policy**: Comprehensive privacy policy page
-- **Responsive Design**: Mobile-friendly layout
-- **Clean Navigation**: Easy-to-use navigation between pages
-
 ## Tech Stack
 
 - React 18
 - React Router DOM
 - CSS3 with responsive design
 - GitHub Pages for deployment
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js (version 14 or higher)
-- npm or yarn
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone <your-repo-url>
-cd my-ecommerce-site
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Start the development server:
-```bash
-npm start
-```
-
-4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-## Deployment
-
-### GitHub Pages
-
-1. Install gh-pages:
-```bash
-npm install --save-dev gh-pages
-```
-
-2. Deploy:
-```bash
-npm run deploy
-```
-
-3. Update the `homepage` field in `package.json` with your GitHub username and repository name.
 
 ## Project Structure
 
