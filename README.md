@@ -14,7 +14,7 @@ Access at: https://emaadqazi.github.io/CP340_Website
 
 ```
 src/
-├── components/          # Reusable components
+├── components/         # Reusable components
 │   ├── Header.js       # Navigation header
 │   ├── Footer.js       # Site footer
 │   ├── ProductCard.js  # Product display component
