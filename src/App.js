@@ -5,10 +5,12 @@ import { HelmetProvider } from 'react-helmet-async';
 import { CartProvider } from './context/CartContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import SeedReviewsButton from './components/SeedReviewsButton';
 import Home from './pages/Home';
 import About from './pages/About';
 import Blog from './pages/Blog';
 import Products from './pages/Products';
+import Reviews from './pages/Reviews';
 import Privacy from './pages/Privacy';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
@@ -29,12 +31,14 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/products" element={<Products />} />
+                <Route path="/reviews" element={<Reviews />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
               </Routes>
             </main>
             <Footer />
+            <SeedReviewsButton />
             <ToastContainer
               position="top-right"
               autoClose={3000}

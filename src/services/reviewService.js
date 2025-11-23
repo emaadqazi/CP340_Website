@@ -4,7 +4,6 @@ import {
   query, 
   where, 
   getDocs, 
-  orderBy,
   Timestamp,
   deleteDoc,
   doc
@@ -30,23 +29,32 @@ export async function addReview(reviewData) {
 // Get all reviews for a specific product
 export async function getReviewsByProduct(productId) {
   try {
+    console.log('🔎 reviewService: Querying reviews for productId:', productId, 'Type:', typeof productId);
     const reviewsRef = collection(db, 'reviews');
     const q = query(
       reviewsRef, 
-      where('productId', '==', productId),
-      orderBy('date', 'desc') // Most recent first
+      where('productId', '==', productId)
+      // orderBy removed to avoid Firebase index requirement
     );
     
     const querySnapshot = await getDocs(q);
     const reviews = [];
     
     querySnapshot.forEach((doc) => {
+      console.log('📄 Found review:', doc.id, 'productId:', doc.data().productId, 'Type:', typeof doc.data().productId);
       reviews.push({
         id: doc.id,
         ...doc.data()
       });
     });
     
+    // Sort reviews manually by date (most recent first)
+    reviews.sort((a, b) => {
+      if (!a.date || !b.date) return 0;
+      return b.date.seconds - a.date.seconds;
+    });
+    
+    console.log(`✅ reviewService: Found ${reviews.length} reviews for productId ${productId}`);
     return reviews;
   } catch (error) {
     console.error('Error fetching reviews:', error);

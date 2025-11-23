@@ -5,6 +5,7 @@ import { useCart } from '../context/CartContext';
 import ReviewSummary from './ReviewSummary';
 import ReviewForm from './ReviewForm';
 import ReviewsList from './ReviewsList';
+import ProductRating from './ProductRating';
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
@@ -50,6 +51,7 @@ const ProductCard = ({ product }) => {
         />
         <div className="product-info">
           <h3>{product.name}</h3>
+          <ProductRating productId={product.id} />
           <p>{product.description}</p>
           <div className="product-price">${product.price}</div>
           <div className="product-actions">

@@ -40,7 +40,7 @@ function ReviewsList({ productId, refreshTrigger }) {
   };
 
   if (loading) {
-    return <div className={styles.loading}>Loading reviews...</div>;
+    return null; // Don't show loading state
   }
 
   if (reviews.length === 0) {
