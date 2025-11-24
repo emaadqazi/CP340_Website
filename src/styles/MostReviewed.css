@@ -1,0 +1,14 @@
+.most-reviewed-section {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+}
+
+.most-reviewed-section h2 {
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-size: 2.5rem;
+  color: #FFD700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+}

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { SEO_KEYWORDS, DEFAULT_DESCRIPTIONS } from '../utils/seoUtils';
 import '../styles/Home.css';
+import TopRatedProducts from '../components/TopRatedProducts';
+import MostReviewedProducts from '../components/MostReviewedProducts';
 
 const Home = () => {
   return (
@@ -22,6 +24,9 @@ const Home = () => {
           <Link to="/products" className="cta-button">Shop Student Tech</Link>
         </div>
       </section>
+
+      <TopRatedProducts/>
+      {/* <MostReviewedProducts/> */}
       
       <section className="features">
         <div className="container">

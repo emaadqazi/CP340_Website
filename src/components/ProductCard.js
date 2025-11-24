@@ -6,6 +6,7 @@ import ReviewSummary from './ReviewSummary';
 import ReviewForm from './ReviewForm';
 import ReviewsList from './ReviewsList';
 import ProductRating from './ProductRating';
+import RelatedProducts from '../components/RelatedProducts';
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
@@ -86,6 +87,7 @@ const ProductCard = ({ product }) => {
                 <ReviewSummary productId={product.id} />
                 <ReviewForm productId={product.id} onReviewAdded={handleReviewAdded} />
                 <ReviewsList productId={product.id} refreshTrigger={refreshReviews} />
+                <RelatedProducts currentProduct={product}/>
               </div>
             </div>
           </div>

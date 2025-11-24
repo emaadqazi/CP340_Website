@@ -1,0 +1,30 @@
+.top-rated-section {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+}
+
+.top-rated-section h2 {
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-size: 2.5rem;
+  color: #FFD700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 3rem;
+  font-size: 1.1rem;
+  font-family: 'Lato', sans-serif;
+}
+
+.loading-message {
+  text-align: center;
+  color: #999;
+  padding: 3rem;
+  font-size: 1.1rem;
+  font-family: 'Lato', sans-serif;
+}
