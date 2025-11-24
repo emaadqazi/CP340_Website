@@ -51,7 +51,7 @@ const Header = () => {
             <Link to="/blog">Blog</Link>
             <Link to="/products">Products</Link>
             <Link to="/reviews">Reviews</Link>
-            <Link to="/privacy">Privacy</Link>
+            <Link to="/security">Security</Link>
           </nav>
           
           {/* Cart Icon */}

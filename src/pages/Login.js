@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link} from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { 
+    checkRateLimit, 
+    recordFailedAttempt, 
+    clearAttempts, 
+    formatLockoutTime 
+} from '../utils/rateLimiter';
 import '../styles/Auth.css'; // Styling
 
 function Login() {
@@ -9,13 +15,51 @@ function Login() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    
+    // Rate limiting state
+    const [isLocked, setIsLocked] = useState(false);
+    const [lockoutTime, setLockoutTime] = useState(0);
+    const [attemptsLeft, setAttemptsLeft] = useState(5);
 
     // Hooks 
     const { login, loginWithGoogle, continueAsGuest } = useAuth();
     const navigate = useNavigate();
 
     // ============================================
-    // EMAIL/PASSWORD LOGIN
+    // RATE LIMIT TIMER
+    // Updates countdown every second when locked out
+    // ============================================
+    useEffect(() => {
+        let timer;
+        if (isLocked && lockoutTime > 0) {
+            timer = setInterval(() => {
+                setLockoutTime(prev => {
+                    if (prev <= 1000) {
+                        setIsLocked(false);
+                        setAttemptsLeft(5);
+                        return 0;
+                    }
+                    return prev - 1000;
+                });
+            }, 1000);
+        }
+        return () => clearInterval(timer);
+    }, [isLocked, lockoutTime]);
+
+    // ============================================
+    // CHECK RATE LIMIT ON EMAIL CHANGE
+    // ============================================
+    useEffect(() => {
+        if (email) {
+            const status = checkRateLimit(email);
+            setIsLocked(status.isLocked);
+            setLockoutTime(status.remainingTime);
+            setAttemptsLeft(status.attemptsLeft);
+        }
+    }, [email]);
+
+    // ============================================
+    // EMAIL/PASSWORD LOGIN WITH RATE LIMITING
     // ============================================
     async function handleSubmit(e) {
         e.preventDefault();
@@ -24,34 +68,63 @@ function Login() {
             return; // Stop execution & do not try to log user in
         }
 
+        // Check rate limit before attempting login
+        const rateLimitStatus = checkRateLimit(email);
+        if (rateLimitStatus.isLocked) {
+            setIsLocked(true);
+            setLockoutTime(rateLimitStatus.remainingTime);
+            setError(`Too many failed attempts. Please try again in ${formatLockoutTime(rateLimitStatus.remainingTime)}.`);
+            return;
+        }
+
         try {
             setError(''); // Clear previous errors 
             setLoading(true);
             await login(email, password); // Call Firebase login via AuthContext
+            
+            // Clear rate limit attempts on successful login
+            clearAttempts(email);
+            
             navigate('/'); // Redirect user to home page if they succeed
         } catch (err) {
             console.log("Login error:", err.code, err.message);
+            
+            // Record failed attempt for rate limiting
+            const result = recordFailedAttempt(email);
+            setAttemptsLeft(result.attemptsLeft);
+            
+            if (result.isNowLocked) {
+                setIsLocked(true);
+                setLockoutTime(result.remainingTime);
+                setError(`Account locked due to too many failed attempts. Please try again in ${formatLockoutTime(result.remainingTime)}.`);
+                return;
+            }
+            
+            // Show attempts remaining warning
+            const attemptsWarning = result.attemptsLeft <= 2 
+                ? ` (${result.attemptsLeft} attempt${result.attemptsLeft !== 1 ? 's' : ''} remaining)`
+                : '';
+            
             switch (err.code) {
                 case 'auth/user-not-found':
-                    setError('No account found with this email. Please sign up.');
+                    setError(`No account found with this email.${attemptsWarning}`);
                     break;
                 case 'auth/wrong-password':
-                    setError('Incorrect password. Please try again.');
+                    setError(`Incorrect password.${attemptsWarning}`);
                     break;
                 case 'auth/invalid-email':
                     setError('Please enter a valid email address.');
                     break;
                 case 'auth/too-many-requests':
-                    // Firebase has built-in brute force protection!
-                    // After too many failed attempts, it temporarily blocks the user
+                    // Firebase's built-in rate limiting kicked in
                     setError('Too many failed attempts. Please try again later.');
                     break;
                 case 'auth/invalid-credential':
-                    setError('Invalid email or password.');
+                    setError(`Invalid email or password.${attemptsWarning}`);
                     break;
                 default:
                     // Fallback for any other errors
-                    setError('Failed to log in. Please try again.');
+                    setError(`Failed to log in.${attemptsWarning}`);
             }
         } finally {
             setLoading(false);
@@ -146,9 +219,9 @@ function Login() {
                     <button 
                         type="submit"
                         className="auth-button"
-                        disabled={loading}
+                        disabled={loading || isLocked}
                     >
-                        {loading ? 'Logging in...' : 'Login'}
+                        {loading ? 'Logging in...' : isLocked ? `Locked (${formatLockoutTime(lockoutTime)})` : 'Login'}
                     </button>
                 </form>
 

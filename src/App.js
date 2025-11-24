@@ -17,6 +17,7 @@ import Checkout from './pages/Checkout';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Account from './pages/Account';
+import Security from './pages/Security';
 import './styles/App.css';
 import './styles/Toast.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -59,6 +60,7 @@ function AppLayout() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/security" element={<Security />} />
         </Routes>
       </main>
       {!isAuthPage && <Footer />}
