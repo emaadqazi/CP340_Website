@@ -5,6 +5,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import StripePaymentForm from '../components/StripePaymentForm';
 import OrderConfirmation from '../components/OrderConfirmation';
 import { stripePromise } from '../utils/stripeConfig';
+import { trackBeginCheckout, trackPurchase } from '../services/analyticsService';
 import '../styles/Checkout.css';
 import '../styles/StripePayment.css';
 import '../styles/OrderConfirmation.css';
@@ -39,11 +40,17 @@ const Checkout = () => {
   };
 
   const handlePaymentSuccess = (paymentIntentData) => {
+    const orderId = `ORDER-${Date.now()}`;
+    
+    // Track purchase in analytics
+    trackPurchase(items, total, orderId);
+    
     setPaymentIntent(paymentIntentData);
     setOrderDetails({
       items: items,
       total: total,
-      shippingInfo: formData
+      shippingInfo: formData,
+      orderId: orderId
     });
     setPaymentSuccess(true);
     clearCart();
@@ -72,6 +79,13 @@ const Checkout = () => {
       await paymentFunction();
     }
   };
+
+  // Track checkout start
+  useEffect(() => {
+    if (items.length > 0) {
+      trackBeginCheckout(items, total);
+    }
+  }, []); // Only run once on mount
 
   // Redirect to products if cart is empty and not in success state
   useEffect(() => {

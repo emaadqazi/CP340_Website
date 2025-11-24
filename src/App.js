@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { HelmetProvider } from 'react-helmet-async';
 import { CartProvider } from './context/CartContext';
@@ -17,12 +17,28 @@ import Checkout from './pages/Checkout';
 import './styles/App.css';
 import './styles/Toast.css';
 import 'react-toastify/dist/ReactToastify.css';
+import { trackPageView } from './services/analyticsService';
+
+// Separate component to use useLocation hook inside Router
+function AnalyticsTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const pageName = location.pathname === '/' ? 'Home' :
+                     location.pathname.replace('/', '').charAt(0).toUpperCase() + 
+                     location.pathname.slice(2);
+    trackPageView(pageName, window.location.href);
+  }, [location]);
+
+  return null;
+}
 
 function App() {
   return (
     <HelmetProvider>
       <CartProvider>
         <Router basename="/CP340_Website">
+          <AnalyticsTracker />
           <div className="App">
             <Header />
             <main>

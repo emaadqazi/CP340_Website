@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { addReview } from '../services/reviewService';
 import styles from '../styles/ReviewForm.module.css';
+import { trackReviewSubmission } from '../services/analyticsService';
 
 function ReviewForm({ productId, onReviewAdded }) {
   const [userName, setUserName] = useState('');
@@ -40,6 +41,7 @@ function ReviewForm({ productId, onReviewAdded }) {
     const result = await addReview(reviewData);
 
     if (result.success) {
+      trackReviewSubmission(productId, rating); // Track review
       setMessage({ type: 'success', text: 'Review submitted successfully!' });
       setUserName('');
       setRating(0);

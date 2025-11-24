@@ -7,6 +7,7 @@ import ReviewForm from './ReviewForm';
 import ReviewsList from './ReviewsList';
 import ProductRating from './ProductRating';
 import RelatedProducts from '../components/RelatedProducts';
+import { trackProductView, trackAddToCart } from "../services/analyticsService";
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
@@ -16,6 +17,7 @@ const ProductCard = ({ product }) => {
 
   const handleAddToCart = () => {
     addToCart(product);
+    trackAddToCart(product, 1); // Track add to cart
     toast.success(`Successfully added ${product.name} to cart!`, {
       position: "top-right",
       autoClose: 3000,
@@ -29,6 +31,7 @@ const ProductCard = ({ product }) => {
   };
 
   const handleViewDetails = () => {
+    trackProductView(product); // Track when modal opens
     setShowModal(true);
   };
 
