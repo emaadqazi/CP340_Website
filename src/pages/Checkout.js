@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { Elements } from '@stripe/react-stripe-js';
 import StripePaymentForm from '../components/StripePaymentForm';
 import OrderConfirmation from '../components/OrderConfirmation';
 import { stripePromise } from '../utils/stripeConfig';
 import { trackBeginCheckout, trackPurchase } from '../services/analyticsService';
+// Firestore imports for saving orders
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import { db } from '../config/firebase';
 import '../styles/Checkout.css';
 import '../styles/StripePayment.css';
 import '../styles/OrderConfirmation.css';
 
 const Checkout = () => {
   const { items, getTotalPrice, clearCart } = useCart();
+  const { user } = useAuth(); // Get current user for saving orders
   const total = getTotalPrice();
   const navigate = useNavigate();
   
@@ -39,11 +44,58 @@ const Checkout = () => {
     });
   };
 
-  const handlePaymentSuccess = (paymentIntentData) => {
+  const handlePaymentSuccess = async (paymentIntentData) => {
     const orderId = `ORDER-${Date.now()}`;
     
     // Track purchase in analytics
     trackPurchase(items, total, orderId);
+    
+    // ============================================
+    // SAVE ORDER TO FIRESTORE
+    // ============================================
+    // This creates a record of the order that users can view in their account
+    try {
+      const orderData = {
+        // Link order to user (or 'guest' if not logged in)
+        // user?.uid uses optional chaining - if user is null, returns undefined
+        userId: user?.uid || 'guest',
+        userEmail: user?.email || formData.email,
+        
+        // Order details - map items to only include needed fields
+        items: items.map(item => ({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          category: item.category
+        })),
+        total: total,
+        
+        // Shipping information from the form
+        shippingInfo: {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          address: formData.address,
+          city: formData.city,
+          zipCode: formData.zipCode
+        },
+        
+        // Order metadata
+        date: Timestamp.now(), // Firebase server timestamp
+        status: 'confirmed',
+        paymentId: paymentIntentData?.id || 'mock-payment'
+      };
+      
+      // addDoc creates a new document with auto-generated ID
+      const docRef = await addDoc(collection(db, 'orders'), orderData);
+      console.log('✅ Order saved with ID:', docRef.id);
+      
+    } catch (error) {
+      // Log error but don't block success - order still went through
+      console.error('Error saving order to Firestore:', error);
+    }
     
     setPaymentIntent(paymentIntentData);
     setOrderDetails({
@@ -85,6 +137,7 @@ const Checkout = () => {
     if (items.length > 0) {
       trackBeginCheckout(items, total);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Only run once on mount
 
   // Redirect to products if cart is empty and not in success state

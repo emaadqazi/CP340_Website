@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { ToastContainer } from 'react-toastify';
 import { HelmetProvider } from 'react-helmet-async';
 import { CartProvider } from './context/CartContext';
+import { AuthProvider } from './context/AuthContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SeedReviewsButton from './components/SeedReviewsButton';
@@ -14,6 +15,9 @@ import Reviews from './pages/Reviews';
 import Privacy from './pages/Privacy';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Account from './pages/Account';
 import './styles/App.css';
 import './styles/Toast.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -38,36 +42,41 @@ function App() {
     <HelmetProvider>
       <CartProvider>
         <Router basename="/CP340_Website">
-          <AnalyticsTracker />
-          <div className="App">
-            <Header />
-            <main>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/products" element={<Products />} />
-                <Route path="/reviews" element={<Reviews />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/checkout" element={<Checkout />} />
-              </Routes>
-            </main>
-            <Footer />
-            <SeedReviewsButton />
-            <ToastContainer
-              position="top-right"
-              autoClose={3000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="dark"
-            />
-          </div>
+          <AuthProvider>
+            <AnalyticsTracker />
+            <div className="App">
+              <Header />
+              <main>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/products" element={<Products />} />
+                  <Route path="/reviews" element={<Reviews />} />
+                  <Route path="/privacy" element={<Privacy />} />
+                  <Route path="/cart" element={<Cart />} />
+                  <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/signup" element={<Signup />} />
+                  <Route path="/account" element={<Account />} />
+                </Routes>
+              </main>
+              <Footer />
+              <SeedReviewsButton />
+              <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+              />
+            </div>
+          </AuthProvider>
         </Router>
       </CartProvider>
     </HelmetProvider>
