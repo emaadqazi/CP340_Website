@@ -77,8 +77,21 @@ const OrderConfirmation = ({ orderDetails, paymentIntent }) => {
               <div className="shipping-info-section">
                 <h3>Shipping Information</h3>
                 <div className="shipping-details">
-                  <p><strong>Estimated Delivery:</strong> 3-5 business days</p>
-                  <p><strong>Shipping Method:</strong> Standard Shipping (FREE)</p>
+                  <p>
+                    <strong>Estimated Delivery:</strong>{' '}
+                    {orderDetails?.shippingInfo?.shippingMethod === 'nextday' && '1-2 business days'}
+                    {orderDetails?.shippingInfo?.shippingMethod === 'express' && '3-5 business days'}
+                    {(!orderDetails?.shippingInfo?.shippingMethod || orderDetails?.shippingInfo?.shippingMethod === 'standard') && '7-10 business days'}
+                  </p>
+                  <p>
+                    <strong>Shipping Method:</strong>{' '}
+                    {orderDetails?.shippingInfo?.shippingMethod === 'nextday' && 'Next Day Delivery ($24.99)'}
+                    {orderDetails?.shippingInfo?.shippingMethod === 'express' && 'Express Shipping ($9.99)'}
+                    {(!orderDetails?.shippingInfo?.shippingMethod || orderDetails?.shippingInfo?.shippingMethod === 'standard') && 'Standard Shipping (FREE) ♻️'}
+                  </p>
+                  {orderDetails?.shippingInfo?.ecoPackaging && (
+                    <p><strong>Packaging:</strong> Eco-Friendly Packaging ♻️</p>
+                  )}
                   <p><strong>Tracking:</strong> You will receive a tracking number via email once your order ships.</p>
                 </div>
               </div>
@@ -116,7 +129,13 @@ const OrderConfirmation = ({ orderDetails, paymentIntent }) => {
                   <div className="step-number">3</div>
                   <div className="step-content">
                     <h3>Delivery</h3>
-                    <p>Your order will arrive within 3-5 business days.</p>
+                    <p>
+                      Your order will arrive within{' '}
+                      {orderDetails?.shippingInfo?.shippingMethod === 'nextday' && '1-2 business days'}
+                      {orderDetails?.shippingInfo?.shippingMethod === 'express' && '3-5 business days'}
+                      {(!orderDetails?.shippingInfo?.shippingMethod || orderDetails?.shippingInfo?.shippingMethod === 'standard') && '7-10 business days'}
+                      .
+                    </p>
                   </div>
                 </div>
               </div>

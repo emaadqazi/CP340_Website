@@ -288,6 +288,20 @@ function Account() {
                                         ))}
                                     </div>
                                     
+                                    {/* Shipping Info */}
+                                    {order.shippingInfo?.shippingMethod && (
+                                        <div className="order-shipping-info">
+                                            <span className="shipping-label">
+                                                {order.shippingInfo.shippingMethod === 'nextday' && 'Next Day Delivery'}
+                                                {order.shippingInfo.shippingMethod === 'express' && 'Express Shipping'}
+                                                {order.shippingInfo.shippingMethod === 'standard' && 'Standard Shipping ♻️'}
+                                            </span>
+                                            {order.shippingInfo.ecoPackaging && (
+                                                <span className="eco-badge-small">Eco-Friendly Packaging ♻️</span>
+                                            )}
+                                        </div>
+                                    )}
+                                    
                                     {/* Order Total */}
                                     <div className="order-footer">
                                         <span className="order-total-label">Total:</span>

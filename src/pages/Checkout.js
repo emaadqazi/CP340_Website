@@ -17,7 +17,6 @@ import '../styles/OrderConfirmation.css';
 const Checkout = () => {
   const { items, getTotalPrice, clearCart } = useCart();
   const { user } = useAuth(); // Get current user for saving orders
-  const total = getTotalPrice();
   const navigate = useNavigate();
   
   const [formData, setFormData] = useState({
@@ -27,7 +26,9 @@ const Checkout = () => {
     phone: '',
     address: '',
     city: '',
-    zipCode: ''
+    zipCode: '',
+    shippingMethod: 'standard', // Default shipping method
+    ecoPackaging: false // Default eco-packaging option
   });
   
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -36,6 +37,24 @@ const Checkout = () => {
   const [currentStep, setCurrentStep] = useState(1); // 1 = Shipping, 2 = Payment
   const [paymentFunction, setPaymentFunction] = useState(null);
   const [isPaymentLoading, setIsPaymentLoading] = useState(false);
+
+  // Calculate shipping cost based on selected method
+  const getShippingCost = () => {
+    switch (formData.shippingMethod) {
+      case 'express':
+        return 9.99;
+      case 'nextday':
+        return 24.99;
+      case 'standard':
+      default:
+        return 0;
+    }
+  };
+
+  // Calculate total including shipping
+  const subtotal = getTotalPrice();
+  const shippingCost = getShippingCost();
+  const total = subtotal + shippingCost;
 
   const handleInputChange = (e) => {
     setFormData({
@@ -79,7 +98,9 @@ const Checkout = () => {
           phone: formData.phone,
           address: formData.address,
           city: formData.city,
-          zipCode: formData.zipCode
+          zipCode: formData.zipCode,
+          shippingMethod: formData.shippingMethod,
+          ecoPackaging: formData.ecoPackaging
         },
         
         // Order metadata
@@ -113,7 +134,8 @@ const Checkout = () => {
     // Error handling is done in the StripePaymentForm component
   };
 
-  const handleProceedToPayment = () => {
+  const handleProceedToPayment = (e) => {
+    e.preventDefault();
     setCurrentStep(2);
   };
 
@@ -179,6 +201,7 @@ const Checkout = () => {
         <div className="checkout-content">
           <div className="checkout-form">
             {currentStep === 1 && (
+              <form onSubmit={handleProceedToPayment}>
               <div className="form-section">
                 <h2>Shipping Information</h2>
               <div className="form-row">
@@ -262,7 +285,100 @@ const Checkout = () => {
                   />
                 </div>
               </div>
+
+              <div className="shipping-method-section">
+                <h3>Shipping Method</h3>
+                <p className="shipping-subtitle">Choose your preferred delivery speed. Longer delivery times reduce carbon emissions.</p>
+                
+                <div className="shipping-options">
+                  <label className={`shipping-option ${formData.shippingMethod === 'standard' ? 'selected' : ''}`}>
+                    <input
+                      type="radio"
+                      name="shippingMethod"
+                      value="standard"
+                      checked={formData.shippingMethod === 'standard'}
+                      onChange={handleInputChange}
+                    />
+                    <div className="shipping-option-content">
+                      <div className="shipping-header">
+                        <span className="shipping-name">Standard Shipping</span>
+                        <span className="shipping-price">FREE</span>
+                      </div>
+                      <div className="shipping-details">
+                        <span className="shipping-time">7-10 business days</span>
+                        <span className="eco-badge">♻️ Most Sustainable</span>
+                      </div>
+                    </div>
+                  </label>
+
+                  <label className={`shipping-option ${formData.shippingMethod === 'express' ? 'selected' : ''}`}>
+                    <input
+                      type="radio"
+                      name="shippingMethod"
+                      value="express"
+                      checked={formData.shippingMethod === 'express'}
+                      onChange={handleInputChange}
+                    />
+                    <div className="shipping-option-content">
+                      <div className="shipping-header">
+                        <span className="shipping-name">Express Shipping</span>
+                        <span className="shipping-price">$9.99</span>
+                      </div>
+                      <div className="shipping-details">
+                        <span className="shipping-time">3-5 business days</span>
+                      </div>
+                    </div>
+                  </label>
+
+                  <label className={`shipping-option ${formData.shippingMethod === 'nextday' ? 'selected' : ''}`}>
+                    <input
+                      type="radio"
+                      name="shippingMethod"
+                      value="nextday"
+                      checked={formData.shippingMethod === 'nextday'}
+                      onChange={handleInputChange}
+                    />
+                    <div className="shipping-option-content">
+                      <div className="shipping-header">
+                        <span className="shipping-name">Next Day Delivery</span>
+                        <span className="shipping-price">$24.99</span>
+                      </div>
+                      <div className="shipping-details">
+                        <span className="shipping-time">1-2 business days</span>
+                      </div>
+                    </div>
+                  </label>
+                </div>
               </div>
+
+              <div className="eco-packaging-section">
+                <label className="checkbox-container">
+                  <input
+                    type="checkbox"
+                    name="ecoPackaging"
+                    checked={formData.ecoPackaging}
+                    onChange={(e) => setFormData({...formData, ecoPackaging: e.target.checked})}
+                  />
+                  <span className="checkbox-label">
+                    Use eco-friendly packaging (recycled materials) ♻️
+                  </span>
+                </label>
+              </div>
+
+              <div className="form-actions">
+                <button 
+                  type="button" 
+                  className="btn-secondary"
+                  onClick={() => navigate('/cart')}
+                >
+                  Back to Cart
+                </button>
+                <button type="submit" className="btn-primary">
+                  Continue to Payment
+                </button>
+              </div>
+              </div>
+              </form>
             )}
 
             {currentStep === 2 && (
@@ -309,11 +425,11 @@ const Checkout = () => {
               <div className="summary-total">
                 <div className="total-row">
                   <span>Subtotal:</span>
-                  <span>${total.toFixed(2)}</span>
+                  <span>${subtotal.toFixed(2)}</span>
                 </div>
                 <div className="total-row">
                   <span>Shipping:</span>
-                  <span>FREE</span>
+                  <span>{shippingCost === 0 ? 'FREE' : `$${shippingCost.toFixed(2)}`}</span>
                 </div>
                 <div className="total-row final-total">
                   <span>Total:</span>

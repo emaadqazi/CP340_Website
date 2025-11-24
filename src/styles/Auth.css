@@ -584,6 +584,33 @@
     color: #FFD700;
 }
 
+.order-shipping-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem 0;
+    border-top: 1px solid #2a2a2a;
+    border-bottom: 1px solid #2a2a2a;
+    margin: 0.75rem 0;
+}
+
+.shipping-label {
+    color: #ccc;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.eco-badge-small {
+    background: linear-gradient(135deg, #2d5016 0%, #1a3010 100%);
+    color: #90ee90;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid #90ee90;
+    width: fit-content;
+}
+
 .order-footer {
     display: flex;
     justify-content: space-between;
