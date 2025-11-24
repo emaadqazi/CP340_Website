@@ -6,7 +6,6 @@ import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import SeedReviewsButton from './components/SeedReviewsButton';
 import Home from './pages/Home';
 import About from './pages/About';
 import Blog from './pages/Blog';
@@ -37,6 +36,48 @@ function AnalyticsTracker() {
   return null;
 }
 
+// Layout component that conditionally renders Header/Footer
+function AppLayout() {
+  const location = useLocation();
+  
+  // Check if current route is an auth page (no header/footer)
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
+  
+  return (
+    <div className="App">
+      {!isAuthPage && <Header />}
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/reviews" element={<Reviews />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/account" element={<Account />} />
+        </Routes>
+      </main>
+      {!isAuthPage && <Footer />}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+    </div>
+  );
+}
+
 function App() {
   return (
     <HelmetProvider>
@@ -44,38 +85,7 @@ function App() {
         <Router basename="/CP340_Website">
           <AuthProvider>
             <AnalyticsTracker />
-            <div className="App">
-              <Header />
-              <main>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/blog" element={<Blog />} />
-                  <Route path="/products" element={<Products />} />
-                  <Route path="/reviews" element={<Reviews />} />
-                  <Route path="/privacy" element={<Privacy />} />
-                  <Route path="/cart" element={<Cart />} />
-                  <Route path="/checkout" element={<Checkout />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/signup" element={<Signup />} />
-                  <Route path="/account" element={<Account />} />
-                </Routes>
-              </main>
-              <Footer />
-              <SeedReviewsButton />
-              <ToastContainer
-                position="top-right"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="dark"
-              />
-            </div>
+            <AppLayout />
           </AuthProvider>
         </Router>
       </CartProvider>

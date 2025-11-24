@@ -1,4 +1,99 @@
 /* ============================================
+   STANDALONE AUTH PAGE (Full screen, no header/footer)
+   ============================================ */
+.auth-page-standalone {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #1a1a1a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated background lines - diagonal gold streaks */
+.auth-bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.auth-line {
+    position: absolute;
+    width: 2px;
+    height: 200%;
+    background: linear-gradient(180deg, 
+        transparent 0%, 
+        rgba(255, 215, 0, 0.3) 20%, 
+        rgba(255, 215, 0, 0.6) 50%, 
+        rgba(255, 215, 0, 0.3) 80%, 
+        transparent 100%);
+    transform: rotate(45deg);
+    animation: authLineMove 8s ease-in-out infinite;
+}
+
+.auth-line-1 {
+    left: 10%;
+    animation-delay: 0s;
+    opacity: 0.4;
+}
+
+.auth-line-2 {
+    left: 30%;
+    animation-delay: 2s;
+    opacity: 0.6;
+}
+
+.auth-line-3 {
+    right: 30%;
+    animation-delay: 4s;
+    opacity: 0.5;
+}
+
+.auth-line-4 {
+    right: 10%;
+    animation-delay: 6s;
+    opacity: 0.4;
+}
+
+@keyframes authLineMove {
+    0%, 100% {
+        transform: rotate(45deg) translateY(-50%);
+    }
+    50% {
+        transform: rotate(45deg) translateY(0%);
+    }
+}
+
+/* Logo on auth page */
+.auth-logo {
+    text-align: center;
+    margin-bottom: 0.75rem;
+}
+
+.auth-logo span {
+    color: #FFD700;
+    font-family: 'Lato', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+}
+
+/* Make container float above animation */
+.auth-page-standalone .auth-container {
+    position: relative;
+    z-index: 10;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+/* ============================================
    AUTH PAGE CONTAINER
    Centers the form vertically and horizontally
    ============================================ */
@@ -17,27 +112,27 @@
    ============================================ */
 .auth-container {
     background: #1a1a1a;
-    padding: 3rem;
+    padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     width: 100%;
-    max-width: 450px;
+    max-width: 400px;
     border: 1px solid #333;
 }
 
 .auth-container h1 {
     color: #FFD700; /* Gold - matches your theme */
     text-align: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
     font-family: 'Lato', sans-serif;
-    font-size: 2rem;
+    font-size: 1.75rem;
 }
 
 .auth-subtitle {
     color: #999;
     text-align: center;
-    margin-bottom: 2rem;
-    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
 }
 
 /* ============================================
@@ -61,23 +156,23 @@
 .auth-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 0.875rem;
 }
 
 .auth-form .form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.35rem;
 }
 
 .auth-form .form-group label {
     color: #fff;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .auth-form .form-group input {
-    padding: 1rem;
+    padding: 0.75rem;
     border: 2px solid #333;
     border-radius: 8px;
     background: #0a0a0a;
@@ -111,14 +206,14 @@
 .auth-button {
     background: #FFD700;
     color: #000;
-    padding: 1rem 2rem;
+    padding: 0.875rem 2rem;
     border: none;
     border-radius: 8px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
 }
 
 .auth-button:hover:not(:disabled) {
@@ -138,8 +233,8 @@
 .auth-switch {
     text-align: center;
     color: #999;
-    margin-top: 2rem;
-    font-size: 0.95rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
 }
 
 .auth-switch a {
@@ -150,6 +245,180 @@
 
 .auth-switch a:hover {
     text-decoration: underline;
+}
+
+/* ============================================
+   GOOGLE SIGN-IN BUTTON
+   ============================================ */
+.google-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.75rem;
+    background: #fff;
+    color: #333;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.google-button:hover:not(:disabled) {
+    background: #f5f5f5;
+    border-color: #ccc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.google-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.google-button svg {
+    flex-shrink: 0;
+}
+
+/* ============================================
+   AUTH DIVIDER (OR separator)
+   ============================================ */
+.auth-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 0.75rem 0;
+    color: #666;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #333;
+}
+
+.auth-divider span {
+    padding: 0 1rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ============================================
+   GUEST OPTION
+   ============================================ */
+.guest-option {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #333;
+    text-align: center;
+}
+
+.guest-button {
+    background: transparent;
+    color: #FFD700;
+    border: 2px solid #FFD700;
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.guest-button:hover {
+    background: #FFD700;
+    color: #000;
+}
+
+.guest-note {
+    display: block;
+    margin-top: 0.75rem;
+    color: #666;
+    font-size: 0.85rem;
+}
+
+/* ============================================
+   EMAIL VERIFICATION BANNER & STATUS
+   ============================================ */
+.verification-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: rgba(255, 193, 7, 0.1);
+    border: 1px solid #ffc107;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.verification-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #ffc107;
+}
+
+.verification-content svg {
+    flex-shrink: 0;
+}
+
+.verification-content strong {
+    display: block;
+    color: #ffc107;
+    margin-bottom: 0.25rem;
+}
+
+.verification-content p {
+    margin: 0;
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.resend-button {
+    background: #ffc107;
+    color: #000;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.resend-button:hover:not(:disabled) {
+    background: #ffca2c;
+}
+
+.resend-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.verification-success {
+    background: rgba(40, 167, 69, 0.1);
+    border: 1px solid #28a745;
+    color: #28a745;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.status-verified {
+    color: #28a745;
+    font-weight: 600;
+}
+
+.status-unverified {
+    color: #ffc107;
+    font-weight: 600;
 }
 
 /* ============================================

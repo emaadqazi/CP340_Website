@@ -96,14 +96,92 @@
 }
 
 /* ============================================
-   AUTH LINK - Far right of header
+   SETTINGS DROPDOWN - Far right of header
    ============================================ */
-.auth-link {
+.settings-dropdown {
+  position: relative;
   margin-left: 1rem;
 }
 
-.auth-link .login-link,
-.auth-link .account-link {
+.settings-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #FFD700;
+  background: transparent;
+  padding: 0.5rem 1rem;
+  border: 2px solid #FFD700;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Lato', sans-serif;
+}
+
+.settings-button:hover {
+  background: #FFD700;
+  color: #000;
+}
+
+.settings-button svg {
+  fill: currentColor;
+}
+
+.dropdown-arrow {
+  transition: transform 0.3s ease;
+}
+
+.dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  min-width: 180px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.875rem 1rem;
+  color: #fff;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-family: 'Lato', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.dropdown-item:hover {
+  background: rgba(255, 215, 0, 0.1);
+  color: #FFD700;
+}
+
+.dropdown-item svg {
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.dropdown-item.logout-item:hover {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
+.settings-dropdown .login-link {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -117,14 +195,9 @@
   font-family: 'Lato', sans-serif;
 }
 
-.auth-link .login-link:hover,
-.auth-link .account-link:hover {
+.settings-dropdown .login-link:hover {
   background: #FFD700;
   color: #000;
-}
-
-.auth-link .account-link svg {
-  fill: currentColor;
 }
 
 @media (max-width: 768px) {
@@ -150,13 +223,21 @@
     font-size: 1.6rem;
   }
   
-  .auth-link {
+  .settings-dropdown {
     margin-left: 0;
   }
   
-  .auth-link .login-link,
-  .auth-link .account-link {
+  .settings-button {
     padding: 0.4rem 0.8rem;
     font-size: 0.9rem;
+  }
+  
+  .settings-dropdown .login-link {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  .dropdown-menu {
+    right: -1rem;
   }
 }

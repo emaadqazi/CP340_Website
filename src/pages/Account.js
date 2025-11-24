@@ -21,14 +21,19 @@ function Account() {
     
     // Error state for logout or fetch failures
     const [error, setError] = useState('');
+    
+    // Success message for verification email sent
+    const [verificationMessage, setVerificationMessage] = useState('');
+    
+    // Loading state for resend verification
+    const [resendLoading, setResendLoading] = useState(false);
 
     // ============================================
     // HOOKS
     // ============================================
     
-    // Get user object and logout function from AuthContext
-    // user.email, user.uid are the properties we'll use
-    const { user, logout } = useAuth();
+    // Get user object and auth functions from AuthContext
+    const { user, logout, isEmailVerified, resendVerificationEmail } = useAuth();
     const navigate = useNavigate();
 
     // ============================================
@@ -118,6 +123,31 @@ function Account() {
     }
 
     // ============================================
+    // RESEND VERIFICATION EMAIL HANDLER
+    // ============================================
+    
+    async function handleResendVerification() {
+        try {
+            setError('');
+            setVerificationMessage('');
+            setResendLoading(true);
+            
+            await resendVerificationEmail();
+            setVerificationMessage('Verification email sent! Check your inbox.');
+            
+        } catch (err) {
+            console.error('Resend verification error:', err);
+            if (err.code === 'auth/too-many-requests') {
+                setError('Too many attempts. Please wait before trying again.');
+            } else {
+                setError('Failed to send verification email. Please try again.');
+            }
+        } finally {
+            setResendLoading(false);
+        }
+    }
+
+    // ============================================
     // HELPER FUNCTION: Format Date
     // ============================================
     
@@ -167,12 +197,47 @@ function Account() {
                 </div>
                 
                 {error && <div className="auth-error">{error}</div>}
+                {verificationMessage && <div className="verification-success">{verificationMessage}</div>}
+                
+                {/* Email Verification Status Banner */}
+                {!isEmailVerified() && user.providerData?.[0]?.providerId === 'password' && (
+                    <div className="verification-banner">
+                        <div className="verification-content">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="8" x2="12" y2="12"/>
+                                <line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                            <div>
+                                <strong>Email not verified</strong>
+                                <p>Please verify your email address to unlock all features.</p>
+                            </div>
+                        </div>
+                        <button 
+                            onClick={handleResendVerification}
+                            className="resend-button"
+                            disabled={resendLoading}
+                        >
+                            {resendLoading ? 'Sending...' : 'Resend Email'}
+                        </button>
+                    </div>
+                )}
                 
                 {/* User Info Section */}
                 <div className="account-section">
                     <h2>Account Details</h2>
                     <div className="account-info">
                         <p><strong>Email:</strong> {user.email}</p>
+                        <p>
+                            <strong>Status:</strong>{' '}
+                            {isEmailVerified() ? (
+                                <span className="status-verified">✓ Verified</span>
+                            ) : user.providerData?.[0]?.providerId !== 'password' ? (
+                                <span className="status-verified">✓ Verified via Google</span>
+                            ) : (
+                                <span className="status-unverified">Not verified</span>
+                            )}
+                        </p>
                         <p><strong>Member since:</strong> {user.metadata?.creationTime ? 
                             new Date(user.metadata.creationTime).toLocaleDateString('en-US', {
                                 month: 'short',
