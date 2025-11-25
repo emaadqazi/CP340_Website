@@ -139,29 +139,6 @@ function Security() {
                         </ul>
                     </div>
                 </div>
-
-                {/* Security Best Practices */}
-                <div className="security-tips">
-                    <h2>Security Best Practices</h2>
-                    <div className="tips-grid">
-                        <div className="tip">
-                            <span className="tip-icon">🔑</span>
-                            <p>Use a strong, unique password with at least 8 characters</p>
-                        </div>
-                        <div className="tip">
-                            <span className="tip-icon">📧</span>
-                            <p>Verify your email address to secure your account</p>
-                        </div>
-                        <div className="tip">
-                            <span className="tip-icon">🚫</span>
-                            <p>Never share your login credentials with others</p>
-                        </div>
-                        <div className="tip">
-                            <span className="tip-icon">🔒</span>
-                            <p>Log out when using shared or public computers</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     );

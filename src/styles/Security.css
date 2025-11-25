@@ -35,9 +35,12 @@
 /* Security Features Grid */
 .security-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     margin-bottom: 3rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .security-card {
@@ -147,55 +150,17 @@
     left: 0;
 }
 
-/* Security Tips Section */
-.security-tips {
-    background: #1a1a1a;
-    border: 1px solid #333;
-    border-radius: 12px;
-    padding: 2rem;
-}
-
-.security-tips h2 {
-    color: #FFD700;
-    font-family: 'Lato', sans-serif;
-    font-size: 1.5rem;
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
-.tips-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-}
-
-.tip {
-    text-align: center;
-    padding: 1rem;
-}
-
-.tip-icon {
-    font-size: 2rem;
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.tip p {
-    color: #999;
-    font-size: 0.9rem;
-    line-height: 1.5;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
     .security-page h1 {
         font-size: 2rem;
     }
-    
+
     .security-grid {
+        grid-template-columns: 1fr;
         gap: 1.5rem;
     }
-    
+
     .security-card {
         padding: 1.5rem;
     }
