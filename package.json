@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "baseline-browser-mapping": "^2.8.31",
     "gh-pages": "^4.0.0"
   }
 }
