@@ -56,22 +56,62 @@ const About = () => {
             
             <h2>Our Commitment to Sustainability</h2>
             <p>
-              At ShopCP340, sustainability isn't just an optional feature. It's a core part of how we operate. 
-              As an e-commerce business, we understand the significant environmental impact that non-reusable, 
-              unethical packaging can have. That's why we've taken meaningful steps to ensure our practices 
+              At ShopCP340, sustainability isn't just an optional feature. It's a core part of how we operate.
+              As an e-commerce business, we understand the significant environmental impact that non-reusable,
+              unethical packaging can have. That's why we've taken meaningful steps to ensure our practices
               are as eco-friendly as possible.
             </p>
             <p>
-              One of the most impactful ways we support sustainability is through our packaging. We've partnered 
-              with trusted suppliers including <strong>Pulp Shred</strong>, <strong>EcoEnclose</strong>, and 
-              <strong> Better Packaging Co.</strong>; all of whom share our commitment to environmental responsibility. 
-              Each supplier provides recyclable, compostable, or biodegradable packaging materials, ensuring that 
-              every order we ship reflects our dedication to reducing waste.
+              One of the most impactful ways we support sustainability is through our packaging. We've partnered
+              with trusted suppliers who share our commitment to environmental responsibility:
             </p>
+
+            <div className="sustainability-partners">
+              <div className="partner-item">
+                <div className="partner-logo">
+                  <img src={`${process.env.PUBLIC_URL}/images/Sustainability/BetterPackaging.png`} alt="Better Packaging Co." />
+                </div>
+                <div className="partner-info">
+                  <h3>Better Packaging Co.</h3>
+                  <p>Provides 100% compostable mailers and packaging that break down naturally without leaving harmful residues.</p>
+                </div>
+              </div>
+
+              <div className="partner-item">
+                <div className="partner-logo">
+                  <img src={`${process.env.PUBLIC_URL}/images/Sustainability/PulpShred.png`} alt="Pulp Shred" />
+                </div>
+                <div className="partner-info">
+                  <h3>Pulp Shred</h3>
+                  <p>Supplies recyclable protective packaging made from recycled materials, reducing waste and resource consumption.</p>
+                </div>
+              </div>
+
+              <div className="partner-item">
+                <div className="partner-logo">
+                  <img src={`${process.env.PUBLIC_URL}/images/Sustainability/EcoEnclose.jpg`} alt="EcoEnclose" />
+                </div>
+                <div className="partner-info">
+                  <h3>EcoEnclose</h3>
+                  <p>Offers biodegradable shipping materials crafted from sustainable sources, minimizing environmental impact.</p>
+                </div>
+              </div>
+
+              <div className="partner-item">
+                <div className="partner-logo">
+                  <img src={`${process.env.PUBLIC_URL}/images/Sustainability/RootTree.png`} alt="Root Tree" />
+                </div>
+                <div className="partner-info">
+                  <h3>Root Tree</h3>
+                  <p>Delivers eco-conscious packaging solutions using renewable resources, supporting a circular economy.</p>
+                </div>
+              </div>
+            </div>
+
             <p>
-              We believe that even small changes can create a lasting impact. By choosing suppliers who align 
-              with our values, we're not just delivering products... We're contributing to a greener future. 
-              ShopCP340 is proud to promote eco-friendly practices and demonstrate to our customers that 
+              We believe that even small changes can create a lasting impact. By choosing suppliers who align
+              with our values, we're not just delivering products... We're contributing to a greener future.
+              ShopCP340 is proud to promote eco-friendly practices and demonstrate to our customers that
               sustainability and quality can go hand in hand.
             </p>
           </div>

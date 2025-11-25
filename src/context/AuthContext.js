@@ -14,6 +14,10 @@ const AuthContext = createContext();
 
 // Google Auth Provider instance
 const googleProvider = new GoogleAuthProvider();
+// Add these settings to improve Google Sign-In reliability
+googleProvider.setCustomParameters({
+    prompt: 'select_account' // Always show account selection
+});
 
 export function useAuth() {
     return useContext(AuthContext);
