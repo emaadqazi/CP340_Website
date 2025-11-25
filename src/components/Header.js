@@ -42,11 +42,11 @@ const Header = () => {
     <header className="header">
       <div className="container">
         <div className="logo">
-          <Link to="/">ShopCP340</Link>
+          <Link to="/home">ShopCP340</Link>
         </div>
         <div className="header-right">
           <nav className="nav">
-            <Link to="/">Home</Link>
+            <Link to="/home">Home</Link>
             <Link to="/about">About</Link>
             <Link to="/blog">Blog</Link>
             <Link to="/products">Products</Link>

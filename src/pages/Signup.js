@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import '../styles/Auth.css';
@@ -7,24 +7,34 @@ function Signup() {
     // ============================================
     // STATE MANAGEMENT
     // ============================================
-    
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    
+
     // Confirm password - extra field to prevent typos
     // User must type password twice and they must match
     const [confirmPassword, setConfirmPassword] = useState('');
-    
+
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
     // ============================================
     // HOOKS
     // ============================================
-    
+
     // Get auth functions from context
-    const { signup, loginWithGoogle, continueAsGuest } = useAuth();
+    const { signup, loginWithGoogle, continueAsGuest, user, isGuest } = useAuth();
     const navigate = useNavigate();
+
+    // ============================================
+    // REDIRECT IF ALREADY LOGGED IN
+    // ============================================
+    useEffect(() => {
+        // If user is logged in (and not a guest), redirect to home
+        if (user && !isGuest) {
+            navigate('/home');
+        }
+    }, [user, isGuest, navigate]);
 
     // ============================================
     // GOOGLE SIGN-IN HANDLER
@@ -35,7 +45,7 @@ function Signup() {
             setError('');
             setLoading(true);
             await loginWithGoogle();
-            navigate('/');
+            navigate('/home');
         } catch (err) {
             console.error('Google sign-in error:', err.code, err.message);
             
@@ -58,7 +68,7 @@ function Signup() {
     
     function handleGuestContinue() {
         continueAsGuest();
-        navigate('/');
+        navigate('/home');
     }
 
     // ============================================

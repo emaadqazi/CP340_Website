@@ -40,16 +40,17 @@ function AnalyticsTracker() {
 // Layout component that conditionally renders Header/Footer
 function AppLayout() {
   const location = useLocation();
-  
+
   // Check if current route is an auth page (no header/footer)
-  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
-  
+  const isAuthPage = location.pathname === '/' || location.pathname === '/login' || location.pathname === '/signup';
+
   return (
     <div className="App">
       {!isAuthPage && <Header />}
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/products" element={<Products />} />

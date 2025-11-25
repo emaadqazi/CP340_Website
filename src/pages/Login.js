@@ -21,9 +21,19 @@ function Login() {
     const [lockoutTime, setLockoutTime] = useState(0);
     const [attemptsLeft, setAttemptsLeft] = useState(5);
 
-    // Hooks 
-    const { login, loginWithGoogle, continueAsGuest } = useAuth();
+    // Hooks
+    const { login, loginWithGoogle, continueAsGuest, user, isGuest } = useAuth();
     const navigate = useNavigate();
+
+    // ============================================
+    // REDIRECT IF ALREADY LOGGED IN
+    // ============================================
+    useEffect(() => {
+        // If user is logged in (and not a guest), redirect to home
+        if (user && !isGuest) {
+            navigate('/home');
+        }
+    }, [user, isGuest, navigate]);
 
     // ============================================
     // RATE LIMIT TIMER
@@ -84,8 +94,8 @@ function Login() {
             
             // Clear rate limit attempts on successful login
             clearAttempts(email);
-            
-            navigate('/'); // Redirect user to home page if they succeed
+
+            navigate('/home'); // Redirect user to home page if they succeed
         } catch (err) {
             console.log("Login error:", err.code, err.message);
             
@@ -139,7 +149,7 @@ function Login() {
             setError('');
             setLoading(true);
             await loginWithGoogle();
-            navigate('/'); // Redirect to home after Google login
+            navigate('/home'); // Redirect to home after Google login
         } catch (err) {
             console.log("Google sign-in error:", err.code, err.message);
             switch (err.code) {
@@ -162,7 +172,7 @@ function Login() {
     // ============================================
     function handleGuestContinue() {
         continueAsGuest();
-        navigate('/'); // Redirect to home as guest
+        navigate('/home'); // Redirect to home as guest
     }
 
     return (
