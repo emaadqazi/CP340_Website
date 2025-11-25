@@ -7,6 +7,7 @@ import StripePaymentForm from '../components/StripePaymentForm';
 import OrderConfirmation from '../components/OrderConfirmation';
 import { stripePromise } from '../utils/stripeConfig';
 import { trackBeginCheckout, trackPurchase } from '../services/analyticsService';
+import { toast } from 'react-toastify';
 // Firestore imports for saving orders
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import { db } from '../config/firebase';
@@ -28,7 +29,8 @@ const Checkout = () => {
     city: '',
     zipCode: '',
     shippingMethod: 'standard', // Default shipping method
-    ecoPackaging: false // Default eco-packaging option
+    ecoPackaging: false, // Default eco-packaging option
+    privacyPolicy: false // Privacy policy agreement
   });
   
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -135,7 +137,31 @@ const Checkout = () => {
   };
 
   const handleProceedToPayment = (e) => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
+
+    // Validate all required fields are filled
+    if (!formData.firstName || !formData.lastName || !formData.email ||
+        !formData.phone || !formData.address || !formData.city || !formData.zipCode) {
+      toast.error('Please fill out all shipping information fields before proceeding.', {
+        toastId: 'shipping-validation-error',
+        position: "top-center",
+        autoClose: 4000,
+      });
+      return;
+    }
+
+    // Validate privacy policy agreement
+    if (!formData.privacyPolicy) {
+      toast.error('Please agree to the Privacy Policy before proceeding.', {
+        toastId: 'privacy-validation-error',
+        position: "top-center",
+        autoClose: 4000,
+      });
+      return;
+    }
+
     setCurrentStep(2);
   };
 
@@ -201,7 +227,7 @@ const Checkout = () => {
         <div className="checkout-content">
           <div className="checkout-form">
             {currentStep === 1 && (
-              <form onSubmit={handleProceedToPayment}>
+              <form onSubmit={handleProceedToPayment} noValidate>
               <div className="form-section">
                 <h2>Shipping Information</h2>
               <div className="form-row">
@@ -213,7 +239,6 @@ const Checkout = () => {
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    required
                   />
                 </div>
                 <div className="form-group">
@@ -224,7 +249,6 @@ const Checkout = () => {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    required
                   />
                 </div>
               </div>
@@ -236,7 +260,6 @@ const Checkout = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  required
                 />
               </div>
               <div className="form-group">
@@ -247,7 +270,6 @@ const Checkout = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  required
                 />
               </div>
               <div className="form-group">
@@ -258,7 +280,6 @@ const Checkout = () => {
                   name="address"
                   value={formData.address}
                   onChange={handleInputChange}
-                  required
                 />
               </div>
               <div className="form-row">
@@ -270,7 +291,6 @@ const Checkout = () => {
                     name="city"
                     value={formData.city}
                     onChange={handleInputChange}
-                    required
                   />
                 </div>
                 <div className="form-group">
@@ -281,7 +301,6 @@ const Checkout = () => {
                     name="zipCode"
                     value={formData.zipCode}
                     onChange={handleInputChange}
-                    required
                   />
                 </div>
               </div>
@@ -400,7 +419,11 @@ const Checkout = () => {
 
             <div className="privacy-agreement">
               <label className="checkbox-label">
-                <input type="checkbox" required />
+                <input
+                  type="checkbox"
+                  checked={formData.privacyPolicy}
+                  onChange={(e) => setFormData({...formData, privacyPolicy: e.target.checked})}
+                />
                 <span className="checkmark"></span>
                 I agree to the <Link to="/privacy" target="_blank">Privacy Policy</Link> and understand how my data will be used and protected.
               </label>
