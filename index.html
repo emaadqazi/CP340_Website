@@ -5,10 +5,19 @@
         // Restore the correct route from sessionStorage
         (function() {
             var redirect = sessionStorage.getItem('redirect');
-            if (redirect) {
+            // Only restore redirect if we're at the root path
+            // Don't restore on authenticated pages like dashboard
+            if (redirect && window.location.pathname === '/') {
                 sessionStorage.removeItem('redirect');
                 history.replaceState(null, null, redirect);
+            } else if (redirect && window.location.pathname !== '/') {
+                // Clear stale redirect data if we're on a different page
+                sessionStorage.removeItem('redirect');
             }
         })();
 
     </script>
+</head>
+<body>
+</body>
+</html>
